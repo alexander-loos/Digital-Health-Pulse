@@ -127,9 +127,20 @@
   }
   .page, nav { position: relative; z-index: 1; }
   nav { z-index: 30; }
+  /* Heat map intro: plays once per visit */
+  #intro { position: fixed; inset: 0; background: #06070a; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; z-index: 100; cursor: pointer; }
+  #intro.done { opacity: 0; pointer-events: none; }
+  #heat { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #word { position: relative; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(30px, 4vw, 44px); font-weight: 500; white-space: nowrap; color: #f4efe6; letter-spacing: 0.01em; opacity: 0; transition: opacity 0.25s ease; }
+  #skip { position: absolute; bottom: 22px; right: 26px; font: 12px/1 system-ui, sans-serif; color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
+<div id="intro" aria-hidden="true">
+  <canvas id="heat"></canvas>
+  <div id="word">Digital Health Pulse</div>
+  <div id="skip">Click to skip</div>
+</div>
 <div class="helix-bg"><img src="DHPlogo.png" alt=""></div>
 <nav>
   <a href="index.html" class="nav-logo"><span class="nav-dot"></span>Digital Health Pulse</a>
@@ -316,6 +327,109 @@ fetch('companies.json').then(r=>r.json()).then(data=>{
   let start = q==='all' ? 'all' : (volumes.some(v=>String(v.number)===q) ? Number(q) : latest);
   setVolume(start);
 });
+</script>
+<script>
+(function(){
+  const intro = document.getElementById('intro');
+  const canvas = document.getElementById('heat');
+  const word = document.getElementById('word');
+  const ctx = canvas.getContext('2d');
+  const DURATION = 2.2;          // seconds of heat animation
+  const SPACING = 7;             // dot grid spacing in px
+  let W, H, dpr;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  // thermal colour ramp: navy -> blue -> teal -> orange -> peach
+  const stops = [
+    [0.00, [10, 12, 22]],
+    [0.25, [24, 60, 170]],
+    [0.45, [40, 150, 190]],
+    [0.62, [120, 150, 110]],
+    [0.78, [235, 120, 55]],
+    [1.00, [255, 196, 150]]
+  ];
+  function ramp(h){
+    h = Math.max(0, Math.min(1, h));
+    for (let i = 1; i < stops.length; i++){
+      if (h <= stops[i][0]){
+        const [a, ca] = stops[i-1], [b, cb] = stops[i];
+        const t = (h - a) / (b - a);
+        return [ca[0] + (cb[0]-ca[0])*t, ca[1] + (cb[1]-ca[1])*t, ca[2] + (cb[2]-ca[2])*t];
+      }
+    }
+    return stops[stops.length-1][1];
+  }
+
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const easeInOut = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+
+  function draw(t){
+    const p = Math.min(t / DURATION, 1);
+    const cx = W / 2, cy = H / 2;
+    const maxR = Math.hypot(W, H) * 0.75;
+    // radius: brief glowing dot, then a fast ease-out expansion past the edges
+    const grow = p < 0.14 ? 0 : easeInOut((p - 0.14) / 0.86);
+    const R = 10 + grow * maxR;
+    const thick = 22 + R * 0.28;
+    const intensity = Math.min(1, p / 0.06) * (1 - Math.max(0, (p - 0.85) / 0.15) * 0.6);
+
+    ctx.fillStyle = '#06070a';
+    ctx.fillRect(0, 0, W, H);
+    const r = SPACING * 0.36;
+    for (let y = SPACING / 2; y < H; y += SPACING){
+      for (let x = SPACING / 2; x < W; x += SPACING){
+        const dx = x - cx, dy = y - cy;
+        const d = Math.hypot(dx, dy);
+        const a = Math.atan2(dy, dx);
+        // wobble the ring so it reads as an organic heat shape, not a perfect circle
+        const wob = 1 + 0.08 * Math.sin(3*a + t*2.1) + 0.045 * Math.sin(5*a - t*3.3) + 0.025 * Math.sin(9*a + t*1.7);
+        const rr = R * wob;
+        const z = (d - rr) / thick;
+        let h = Math.exp(-z*z) * intensity;
+        // the outer side of the ring cools toward blue, the inner side stays warm
+        if (z > 0) h *= 0.72;
+        if (h < 0.035) { ctx.fillStyle = 'rgb(16,18,28)'; }
+        else { const c = ramp(h); ctx.fillStyle = `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`; }
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    word.style.opacity = (p > 0.24 && p < 0.9) ? 1 : 0;
+  }
+
+  function finish(){
+    intro.classList.add('done');
+    try { sessionStorage.setItem('dhpIntroSeen', '1'); } catch(e) {}
+    setTimeout(() => intro.remove(), 600);
+  }
+
+  // expose a frame renderer for previews; normal visitors use the live loop below
+  window.__renderIntroAt = t => { resize(); draw(t); };
+
+  let seen = false;
+  try { seen = sessionStorage.getItem('dhpIntroSeen') === '1'; } catch(e) {}
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (window.__previewMode) { resize(); return; }
+  if (seen || reduce) { intro.remove(); return; }
+
+  resize();
+  window.addEventListener('resize', resize);
+  intro.addEventListener('click', finish);
+  let start = null;
+  function frame(ts){
+    if (!document.body.contains(intro)) return;
+    if (start === null) start = ts;
+    const t = (ts - start) / 1000;
+    draw(t);
+    if (t < DURATION) requestAnimationFrame(frame); else finish();
+  }
+  requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
