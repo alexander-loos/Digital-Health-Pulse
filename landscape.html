@@ -78,19 +78,19 @@
     <a href="about.html">About</a>
     <a href="landscape.html" class="active">Landscape</a>
     <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <span class="nav-badge">Vol. 1 — April 12, 2026</span>
+    <a href="index.html" class="nav-badge" id="vol-badge" style="text-decoration:none;">Vol. 2, June 2026</a>
   </div>
 </nav>
 <div class="page">
   <div class="hero">
     <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Market intelligence</div>
     <h1 class="hero-title">The Digital Health Landscape</h1>
-    <p class="hero-desc">A visual map of where venture capital has flowed across the digital health ecosystem from 2021 to 2026 — tracking 60+ companies across eight sub-sectors by funding size, market maturity, and momentum.</p>
+    <p class="hero-desc">A visual map of where venture capital has flowed across the digital health ecosystem from 2021 to 2026, tracking nearly 50 companies across nine sub-sectors by funding size, market maturity and momentum.</p>
     <div class="hero-meta">
-      <div class="hero-meta-item"><span class="hero-meta-label">Companies mapped</span><span class="hero-meta-val">60+</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Years covered</span><span class="hero-meta-val">2021 — 2026</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Sub-sectors</span><span class="hero-meta-val">8</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Updated</span><span class="hero-meta-val">April 12, 2026</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Companies mapped</span><span class="hero-meta-val">49</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Years covered</span><span class="hero-meta-val">2021 to 2026</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Sub-sectors</span><span class="hero-meta-val">9</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Updated</span><span class="hero-meta-val">November 21, 2026</span></div>
     </div>
   </div>
   <div class="viz-section">
@@ -169,6 +169,9 @@ function applyFilter(){
 function setYear(y,btn){activeYear=y;document.querySelectorAll('.yr-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilter();}
 fetch("landscape.json").then(r=>r.json()).then(d=>{sectors=d.sectors;companies=d.companies;insights=d.insights;initBubbles();});
 window.addEventListener('resize',initBubbles);
+</script>
+<script>
+fetch('companies.json').then(r=>r.json()).then(d=>{const v=(d.meta&&d.meta.volumes)||[];const l=v[v.length-1];if(l){const b=document.getElementById('vol-badge');b.textContent=`Vol. ${l.number}, ${l.label}`;}}).catch(()=>{});
 </script>
 </body>
 </html>

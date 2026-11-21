@@ -95,7 +95,7 @@
     <a href="landscape.html">Landscape</a>
     <a href="newsletter.html" class="active">Newsletter</a>
     <a href="#">Archive</a>
-    <span class="nav-badge">Vol. 1 — April 12, 2026</span>
+    <a href="index.html" class="nav-badge" id="vol-badge" style="text-decoration:none;">Vol. 2, June 2026</a>
   </div>
 </nav>
 
@@ -221,5 +221,8 @@
   </footer>
 
 </div>
+<script>
+fetch('companies.json').then(r=>r.json()).then(d=>{const v=(d.meta&&d.meta.volumes)||[];const l=v[v.length-1];if(l){const b=document.getElementById('vol-badge');b.textContent=`Vol. ${l.number}, ${l.label}`;}}).catch(()=>{});
+</script>
 </body>
 </html>

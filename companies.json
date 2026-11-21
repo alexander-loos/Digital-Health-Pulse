@@ -1,8 +1,17 @@
 {
   "meta": {
-    "volume": 1,
-    "lastUpdated": "April 12, 2026",
-    "coverage": "US Health Tech"
+    "coverage": "US Health Tech",
+    "lastUpdated": "November 21, 2026",
+    "volumes": [
+      {
+        "number": 1,
+        "label": "April 2026"
+      },
+      {
+        "number": 2,
+        "label": "June 2026"
+      }
+    ]
   },
   "companies": [
     {
@@ -18,7 +27,8 @@
       "model": "B2B",
       "score": 5,
       "take": "Transcarent's merger with Accolade in April 2025 — a $621M deal — created one of the most integrated employer-health platforms in the market. The combined entity now serves 20M+ members across 1,700 employers and health plans. Their agentic AI \"WayFinding\" platform is a credible differentiator, deploying voice AI scheduling, symptom-checking, and longitudinal memory across clinical and benefits workflows. The key strategic test is whether they can unify two distinct tech stacks post-merger without eroding the product simplicity that drove growth. At a $2.2B valuation, the margin for execution risk is thin.",
-      "added": "April 12, 2026"
+      "added": "April 12, 2026",
+      "volume": 1
     },
     {
       "name": "Anterior",
@@ -33,7 +43,8 @@
       "model": "B2B",
       "score": 4,
       "take": "Anterior is one of the most interesting bets in payer AI right now. Their differentiation isn't the technology — it's the implementation model: clinicians embedded directly into customer workflows. The 99.24% clinical accuracy independently validated by KLAS Research is a meaningful proof point, and a reported 75% reduction in clinical review cycles at enterprise clients is the kind of ROI that wins multi-year payer contracts. The risk is scalability — an implementation-heavy model is structurally difficult to grow quickly. The central question is whether they can productize the \"Forward Deployed Clinician\" approach without losing what makes it work.",
-      "added": "April 12, 2026"
+      "added": "April 12, 2026",
+      "volume": 1
     },
     {
       "name": "Viz.ai",
@@ -48,7 +59,8 @@
       "model": "B2B",
       "score": 4,
       "take": "Viz.ai built one of the most clinically validated AI diagnostics platforms in the market, starting with FDA-cleared stroke detection and expanding into aortic disease, pulmonary embolism, subdural hematoma, and oncology. Deployed across 1,700+ hospitals globally, their moat is distribution depth and clinical evidence density — not just the algorithm. The 2025 profitability announcement signals healthy unit economics. The strategic risk is that GE HealthCare and Siemens Healthineers are actively bundling AI into scanner hardware; Viz.ai must stay ahead on breadth, evidence quality, and workflow integration to avoid commoditization from below.",
-      "added": "April 12, 2026"
+      "added": "April 12, 2026",
+      "volume": 1
     },
     {
       "name": "Clarify Health",
@@ -63,7 +75,8 @@
       "model": "B2B",
       "score": 3,
       "take": "Clarify's core value proposition — 300M+ patient journeys, 18B+ AI predictions, serving payers, providers, and life sciences — is compelling on paper and validated by a $1.4B unicorn valuation. Their \"Moneyball for healthcare\" framing is a clean strategic narrative that resonates across buyer types. The concern is freshness: their last disclosed funding round was April 2022, and there has been limited public momentum since. In a sector now flooded with analytics entrants, Clarify must accelerate market-facing output to defend its positioning. Worth tracking closely for any IPO filing or M&A activity.",
-      "added": "April 12, 2026"
+      "added": "April 12, 2026",
+      "volume": 1
     },
     {
       "name": "Ro",
@@ -78,7 +91,88 @@
       "model": "B2C",
       "score": 4,
       "take": "Ro is the clearest example of a D2C telehealth company that successfully repositioned around a macro tailwind. Their GLP-1 weight management business generated an estimated $370M in revenue in 2024, driven by partnerships with Eli Lilly for Zepbound and Novo Nordisk for Wegovy at $499/month. The strategic tension is real: as manufacturers standardize pricing and access across all telehealth channels, Ro's product moat narrows to brand, UX, and clinical depth. The long-term question is whether Ro can build sufficient B2B infrastructure — employer and payer relationships — before the D2C market matures.",
-      "added": "April 12, 2026"
+      "added": "April 12, 2026",
+      "volume": 1
+    },
+    {
+      "name": "Assort Health",
+      "url": "assorthealth.com",
+      "sector": "Healthcare AI Agents",
+      "tagClass": "tag-cyan",
+      "stage": "Series C",
+      "funding": "$120M",
+      "fundingDate": "Jun 2026",
+      "totalRaised": "$222M",
+      "leadInvestor": "Menlo Ventures",
+      "model": "B2B",
+      "score": 84,
+      "take": "Assort builds AI agents that pick up the phone at doctors' offices, handling scheduling and insurance checks so patients aren't stuck on hold listening to the same three bars of smooth jazz. It launched in late 2023 and is already valued at $1.2 billion after Menlo Ventures led a $120 million Series C, which is a later funding round that usually comes once a product is clearly selling. Its real edge is scale, since its agents have handled more than 190 million patient calls and every one of them makes the next call a little smarter. What I'm watching is the jump from specialty clinics to big health systems like John Muir Health, where sales take forever and plugging into Epic (the giant software system most hospitals run on) gets messy. If Assort wins there, it stops being a phone tool and becomes the front door to the whole hospital.",
+      "added": "November 21, 2026",
+      "volume": 2
+    },
+    {
+      "name": "Cadence",
+      "url": "cadence.care",
+      "sector": "Telehealth",
+      "tagClass": "tag-coral",
+      "stage": "Series C",
+      "funding": "$100M",
+      "fundingDate": "Jun 2026",
+      "totalRaised": "$241M",
+      "leadInvestor": "Spark Capital",
+      "model": "B2B",
+      "score": 76,
+      "take": "Cadence looks after older patients with conditions like high blood pressure and heart failure from their own homes, using connected blood pressure cuffs and a team of clinicians who step in when the numbers look off. Spark Capital led its $100 million Series C at a $1.23 billion valuation, and health systems like Duke Health and Memorial Hermann invested too, which tells you its own customers believe in it. The traction is real, with more than 100,000 patients across 20+ health systems and revenue that tripled in 2025. Here's my hesitation. Cadence mostly gets paid through remote patient monitoring billing, where insurers pay a monthly fee for every patient being tracked, and both a federal watchdog and UnitedHealthcare have started questioning that model. Its valuation has also barely moved since its 2021 round. Handing more of the clinicians' work to AI could fix the margins, though it could just as easily become the next thing regulators examine.",
+      "added": "November 21, 2026",
+      "volume": 2
+    },
+    {
+      "name": "Trase",
+      "url": "trase.ai",
+      "sector": "Healthcare AI Agents",
+      "tagClass": "tag-cyan",
+      "stage": "Seed",
+      "funding": "$107M",
+      "fundingDate": "Jun 2026",
+      "totalRaised": "$117.5M",
+      "leadInvestor": "ARCH Venture Partners",
+      "model": "B2B",
+      "score": 68,
+      "take": "Trase raised $107 million in a seed round, which is a bit like a high schooler getting drafted straight into the NBA, since seed rounds are usually a few million dollars to get a company off the ground. ARCH Venture Partners, one of the biggest names in biotech investing, led it. The product, Trase Origin, lets large organizations build AI agents that run inside their own secure systems, and at Duke Health's cardiology division those agents already sort roughly 5,000 faxes a month. The catch is focus. Trase also sells to defense customers like the US Navy, so it's betting one platform can serve two very different worlds. I like the infrastructure angle, and with a Series A of $125 million or more reportedly on the way, the company now has to show revenue that matches the size of that check.",
+      "added": "November 21, 2026",
+      "volume": 2
+    },
+    {
+      "name": "xCures",
+      "url": "xcures.com",
+      "sector": "Health Analytics",
+      "tagClass": "tag-amber",
+      "stage": "Series B",
+      "funding": "$46M",
+      "fundingDate": "Jun 2026",
+      "totalRaised": "$76M",
+      "leadInvestor": "Innovius Capital",
+      "model": "B2B",
+      "score": 63,
+      "take": "Medical records are scattered across hospitals and clinics that rarely talk to each other, and xCures is betting it can turn that pile into something a doctor can actually use in minutes. Its Clinical Clarity Engine gathers a patient's records and traces every fact back to where it came from, which matters a lot when one wrong detail could change a treatment decision. The company grew annual recurring revenue (the yearly value of its subscriptions) from about $3 million to $10 million in 2025, and Innovius Capital led a $46 million Series B at a $127 million valuation. That price looks modest next to the unicorns in this volume, which could make it the better bargain. Crowding is the risk, since Particle Health and Health Gorilla chase similar problems, so its oncology roots and careful source tracking have to keep it ahead.",
+      "added": "November 21, 2026",
+      "volume": 2
+    },
+    {
+      "name": "Xellar Biosystems",
+      "url": "xellarbio.com",
+      "sector": "AI Drug Discovery",
+      "tagClass": "tag-gray",
+      "stage": "Series A",
+      "funding": "$50M",
+      "fundingDate": "Jun 2026",
+      "totalRaised": "$50M+",
+      "leadInvestor": "Not disclosed",
+      "model": "B2B",
+      "score": 58,
+      "take": "Most drugs that look great in animal testing still fail in people, and Xellar wants to shrink that gap with organ-on-chip technology, which grows tiny bits of human tissue on a chip about the size of a AA battery so drugs can be tested on something much closer to a real patient. It pairs those chips with lab robots and an AI model that learns from each experiment and suggests the next one. Xellar closed a $50 million Series A and A+ in June, and regulators are helping its case, since the FDA has started moving away from requiring animal tests for some drugs. What gives me pause is that the investors behind the round weren't named, and established players like Emulate and CN Bio already sell organ chips. Xellar is betting its AI loop will matter more than the hardware.",
+      "added": "November 21, 2026",
+      "volume": 2
     }
   ]
 }

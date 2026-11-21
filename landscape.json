@@ -47,6 +47,12 @@
       "label": "AI Drug Discovery",
       "color": "#2a3040",
       "text": "#a0b0d0"
+    },
+    {
+      "id": "ai-agents",
+      "label": "Healthcare AI Agents",
+      "color": "#0e4a5a",
+      "text": "#9ae0ec"
     }
   ],
   "companies": [
@@ -489,6 +495,56 @@
       "y": 78,
       "year": "2026",
       "note": "An AI-powered chronic care coordination platform focused on underserved and Medicaid populations. Combines community health worker workflows with predictive analytics to reduce avoidable hospitalizations."
+    },
+    {
+      "name": "Assort Health",
+      "sector": "ai-agents",
+      "funding": 222,
+      "stage": "Series C",
+      "x": 60,
+      "y": 84,
+      "year": "2026",
+      "note": "An AI agents platform that answers patient calls for doctors' offices and health systems, handling scheduling and insurance checks. Raised a $120M Series C led by Menlo Ventures at a $1.2B valuation after handling more than 190 million patient interactions."
+    },
+    {
+      "name": "Cadence",
+      "sector": "telehealth",
+      "funding": 241,
+      "stage": "Series C",
+      "x": 71,
+      "y": 72,
+      "year": "2026",
+      "note": "A remote care company that monitors older adults with chronic conditions at home and is adding AI agents to its clinical team. Raised a $100M Series C led by Spark Capital at a $1.23B valuation and works with more than 20 health systems."
+    },
+    {
+      "name": "Trase",
+      "sector": "ai-agents",
+      "funding": 117,
+      "stage": "Seed",
+      "x": 14,
+      "y": 70,
+      "year": "2026",
+      "note": "An operating system for building secure AI agents inside regulated organizations, already sorting faxes for Duke Health cardiology. Raised an unusually large $107M seed round led by ARCH Venture Partners."
+    },
+    {
+      "name": "xCures",
+      "sector": "analytics",
+      "funding": 76,
+      "stage": "Series B",
+      "x": 50,
+      "y": 62,
+      "year": "2026",
+      "note": "A clinical data company that organizes scattered medical records into decision-ready summaries with every fact traced to its source. Raised a $46M Series B led by Innovius Capital after growing recurring revenue to about $10M in 2025."
+    },
+    {
+      "name": "Xellar Biosystems",
+      "sector": "drug-disc",
+      "funding": 50,
+      "stage": "Series A",
+      "x": 10,
+      "y": 56,
+      "year": "2026",
+      "note": "Pairs organ-on-chip human tissue models with lab automation and AI to predict how drugs will behave in people before clinical trials. Closed a $50M Series A and A+ in June 2026."
     }
   ],
   "insights": {
@@ -497,7 +553,7 @@
     "2023": "2023 was a year of consolidation and flight to quality as the broader tech downturn compressed multiples and forced discipline. <strong>Hinge Health, Omada, and Tempus AI</strong> secured late-stage rounds signaling IPO readiness, while mental health and chronic disease management emerged as durable employer benefit categories. AI documentation began its quiet ascent — Ambience and Commure both raised in 2023, planting the seeds for the ambient AI wave that would define 2025.",
     "2024": "2024 was the year ambient clinical AI crossed from pilot to production. <strong>Abridge, Ambience, and Suki</strong> collectively raised over $800M as health systems moved decisively to enterprise contracts. Care navigation saw its defining consolidation moment — Transcarent's $621M merger with Accolade. Payer AI also matured, with Anterior and Cohere Health closing meaningful rounds on demonstrated ROI rather than promise.",
     "2025": "2025 was defined by two macro forces: the <strong>AI drug discovery supercycle</strong> and the maturation of clinical AI infrastructure. Isomorphic Labs and Lila Sciences alone absorbed over $1.1B, signaling that deep-tech life science AI has entered a new capital intensity regime. On the care delivery side, Abridge's $5.3B valuation and Hinge Health's IPO filing marked the arrival of digital health's second generation of public-market-ready companies.",
-    "2026": "2026 is early but directionally clear: capital is flowing toward <strong>infrastructure, evidence, and efficiency</strong>. Proteomics, real-world evidence platforms, and autonomous coding are attracting new rounds as the market seeks the layer below the AI application stack. European ambient AI players like Nabla are entering the US market, suggesting incoming competitive pressure on domestic documentation leaders.",
+    "2026": "So far 2026 belongs to AI agents, the software that does a task from start to finish instead of just suggesting what a person should do. In June alone, Assort Health and Trase raised more than $225 million between them to automate the phone calls and paperwork that bury hospital staff. Chronic care is moving the same direction, with Cadence planning to hand routine monitoring work to AI, while companies like xCures sit one layer down and clean up the messy records those agents depend on. On the drug discovery side, the money is chasing better human data, which is why Xellar's organ-on-chip models drew a $50 million round.",
     "all": "Across the full dataset, capital concentration in digital health has undergone a meaningful structural shift since 2021. Early broad-market enthusiasm — characterized by large rounds into telehealth platforms and consumer wearables — has given way to targeted infrastructure-layer bets. <strong>AI-native clinical tools, ambient documentation, and payer workflow automation</strong> are absorbing the largest share of late-stage conviction capital heading into 2026. The companies commanding the highest valuations today are no longer platform plays; they are deeply integrated workflow tools with measurable ROI."
   }
 }
