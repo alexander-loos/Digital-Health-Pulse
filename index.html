@@ -62,6 +62,19 @@
   .tag-amber { background: #2a1e0a; color: #d4944a; }
   .tag-coral { background: #2a1210; color: #d4705a; }
   .tag-gray { background: #1e2028; color: #7888a8; }
+  .tag-cyan { background: #0a2a33; color: #6fd3e3; }
+  .vol-wrap { position: relative; }
+  .vol-btn { font-family: 'DM Sans', sans-serif; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .vol-btn:hover { border-color: var(--neon); }
+  .vol-caret { font-size: 9px; opacity: 0.8; }
+  .vol-menu { display: none; position: absolute; right: 0; top: calc(100% + 8px); background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r-lg); padding: 6px; min-width: 200px; z-index: 20; box-shadow: 0 12px 30px rgba(0,0,0,0.45); }
+  .vol-menu.open { display: block; }
+  .vol-item { display: flex; justify-content: space-between; align-items: center; width: 100%; background: transparent; border: none; color: var(--ink2); font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 8px 10px; border-radius: var(--r); cursor: pointer; text-align: left; }
+  .vol-item:hover { background: var(--bg3); color: var(--ink); }
+  .vol-item.active { color: var(--neon-text); }
+  .vol-item-sub { font-size: 11px; color: var(--ink4); }
+  .vol-note { font-size: 12px; color: var(--ink3); margin: -0.75rem 0 1.5rem; display: none; }
+  .vol-note.show { display: block; }
   .funding-amount { font-size: 14px; font-weight: 500; color: var(--ink2); }
   .funding-total { font-size: 11px; color: var(--ink4); }
   .stage-pill { display: inline-block; font-size: 11px; padding: 3px 10px; border: 1px solid var(--border2); border-radius: 20px; color: var(--ink3); white-space: nowrap; }
@@ -113,6 +126,7 @@
     100% { transform: translateY(-50%) translateX(0px) scale(1); }
   }
   .page, nav { position: relative; z-index: 1; }
+  nav { z-index: 30; }
 </style>
 </head>
 <body>
@@ -124,13 +138,17 @@
     <a href="about.html">About</a>
     <a href="landscape.html">Landscape</a>
     <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <span class="nav-badge" id="vol-badge">Vol. 1, April 12, 2026</span>
+    <div class="vol-wrap">
+      <button class="nav-badge vol-btn" id="vol-badge" onclick="toggleVolMenu(event)">Vol. 1, April 2026 <span class="vol-caret">&#9662;</span></button>
+      <div class="vol-menu" id="vol-menu"></div>
+    </div>
   </div>
 </nav>
 <div class="page">
   <div class="hero">
     <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Ongoing research</div>
     <h1 class="hero-title">Digital Health Pulse</h1>
+    <p class="vol-note" id="vol-note"></p>
     <p class="hero-desc">Tracking the startups building technology for healthcare, from AI diagnostics to tech-driven drug discovery, with analyst commentary on positioning, differentiation and strategic risk.</p>
     <a href="newsletter.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--neon-dim);color:var(--neon-text);font-size:13px;font-weight:500;padding:10px 20px;border-radius:6px;text-decoration:none;border:1px solid var(--neon);margin-bottom:2rem;transition:opacity 0.15s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">Subscribe to the newsletter <span style="font-size:14px;">→</span></a>
   <div class="hero-meta">
@@ -175,11 +193,15 @@
 </div>
 <script>
 // Company data now lives in companies.json, so updates only touch that file.
+let allCompanies = [];
 let companies = [];
 let filtered = [];
+let volumes = [];
+let currentVol = null;
 function parseMoney(s){ const m=String(s).match(/([\d.]+)\s*([MB])/i); if(!m) return 0; return parseFloat(m[1])*(m[2].toUpperCase()==='B'?1000:1); }
 function fmtMoney(mil){ return mil>=1000 ? '$'+(mil/1000).toFixed(1)+'B' : '$'+Math.round(mil)+'M'; }
 function scoreToDots(s){ return s>5 ? Math.round(s/20) : s; }
+function normScore(s){ return s>5 ? s : s*20; }
 function scoreLabel(s){ return s>5 ? s+' / 100' : s+' / 5'; }
 function dots(s){ const n=scoreToDots(s); return Array.from({length:5},(_,i)=>`<div class="dot ${i<n?'dot-on':'dot-off'}"></div>`).join(''); }
 function renderCards(data){
@@ -203,7 +225,7 @@ function renderCards(data){
           <div>
             <div class="take-label">Analyst take</div>
             <p class="take-text">${c.take}</p>
-            <div class="updated-chip"><div class="updated-dot"></div>Last updated ${c.added}</div>
+            <div class="updated-chip"><div class="updated-dot"></div>${(()=>{const v=volumes.find(x=>x.number===c.volume);return v?`Vol. ${v.number}, ${v.label}`:"";})()}</div>
           </div>
           <div class="meta-grid">
             <div class="meta-row-item"><span class="meta-row-label">Sub-sector</span><span class="meta-row-val">${c.sector}</span></div>
@@ -234,31 +256,65 @@ function filterBy(sector,el){
 }
 function sortBy(val){
   const copy=[...filtered];
-  if(val==='score') copy.sort((a,b)=>b.score-a.score);
+  if(val==='score') copy.sort((a,b)=>normScore(b.score)-normScore(a.score));
   else if(val==='name') copy.sort((a,b)=>a.name.localeCompare(b.name));
   renderCards(copy);
 }
 function buildFilters(){
   const wrap=document.querySelector('.filters');
+  wrap.querySelectorAll('.filter-btn').forEach((b,i)=>{ if(i>0) b.remove(); else b.classList.add('active'); });
   [...new Set(companies.map(c=>c.sector))].forEach(s=>{
     const b=document.createElement('button'); b.className='filter-btn'; b.textContent=s;
     b.onclick=()=>filterBy(s,b); wrap.appendChild(b);
   });
 }
-fetch('companies.json').then(r=>r.json()).then(data=>{
-  companies=data.companies; filtered=[...companies];
-  const m=data.meta||{};
-  if(m.volume&&m.lastUpdated) document.getElementById('vol-badge').textContent=`Vol. ${m.volume}, ${m.lastUpdated}`;
-  if(m.lastUpdated) document.getElementById('hero-updated').textContent=m.lastUpdated;
-  if(m.coverage) document.getElementById('hero-coverage').textContent=m.coverage;
+function fmtDate(d,opts){ return d.toLocaleDateString('en-US',opts); }
+function updateStats(){
   const recent=companies.map(c=>c.added).filter(Boolean).map(d=>new Date(d)).sort((a,b)=>b-a)[0];
   if(recent){
-    document.getElementById('hero-recent').textContent=recent.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-    document.getElementById('stat-recent').textContent=recent.toLocaleDateString('en-US',{month:'short'})+" '"+String(recent.getFullYear()).slice(2);
+    document.getElementById('hero-recent').textContent=fmtDate(recent,{month:'long',day:'numeric',year:'numeric'});
+    document.getElementById('stat-recent').textContent=fmtDate(recent,{month:'short'})+" '"+String(recent.getFullYear()).slice(2);
   }
   document.getElementById('stat-funding').textContent=fmtMoney(companies.reduce((t,c)=>t+parseMoney(c.totalRaised),0))+'+';
   document.getElementById('stat-sectors').textContent=new Set(companies.map(c=>c.sector)).size;
-  buildFilters(); renderCards(companies);
+}
+function volLabel(v){ return v ? `Vol. ${v.number}, ${v.label}` : 'All volumes'; }
+function buildVolMenu(){
+  const menu=document.getElementById('vol-menu'); menu.innerHTML='';
+  [...volumes].reverse().concat([null]).forEach(v=>{
+    const n=v?v.number:'all';
+    const count=v?allCompanies.filter(c=>c.volume===v.number).length:allCompanies.length;
+    const b=document.createElement('button');
+    b.className='vol-item'+((currentVol===n)?' active':'');
+    b.innerHTML=`<span>${volLabel(v)}</span><span class="vol-item-sub">${count} ${count===1?'company':'companies'}</span>`;
+    b.onclick=()=>{ setVolume(n); menu.classList.remove('open'); };
+    menu.appendChild(b);
+  });
+}
+function toggleVolMenu(e){ e.stopPropagation(); document.getElementById('vol-menu').classList.toggle('open'); }
+document.addEventListener('click',()=>{ const m=document.getElementById('vol-menu'); if(m) m.classList.remove('open'); });
+function setVolume(n){
+  currentVol=n;
+  const v=volumes.find(x=>x.number===n);
+  companies = n==='all' ? [...allCompanies] : allCompanies.filter(c=>c.volume===n);
+  filtered=[...companies];
+  document.getElementById('vol-badge').innerHTML=`${volLabel(v)} <span class="vol-caret">&#9662;</span>`;
+  const note=document.getElementById('vol-note');
+  if(v && v.note){ note.textContent=v.note; note.classList.add('show'); } else { note.textContent=''; note.classList.remove('show'); }
+  try{ history.replaceState(null,'',n==='all'?'?vol=all':`?vol=${n}`); }catch(e){}
+  document.querySelector('.sort-wrap select').value='default';
+  buildFilters(); buildVolMenu(); updateStats(); renderCards(companies);
+}
+fetch('companies.json').then(r=>r.json()).then(data=>{
+  allCompanies=data.companies.map(c=>({...c,volume:c.volume||1}));
+  const m=data.meta||{};
+  volumes=(m.volumes&&m.volumes.length)?m.volumes:[{number:1,label:'April 2026'}];
+  if(m.lastUpdated) document.getElementById('hero-updated').textContent=m.lastUpdated;
+  if(m.coverage) document.getElementById('hero-coverage').textContent=m.coverage;
+  const q=new URLSearchParams(location.search).get('vol');
+  const latest=volumes[volumes.length-1].number;
+  let start = q==='all' ? 'all' : (volumes.some(v=>String(v.number)===q) ? Number(q) : latest);
+  setVolume(start);
 });
 </script>
 </body>
