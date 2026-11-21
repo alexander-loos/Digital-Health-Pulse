@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Digital Health Pulse</title>
+<title>About | Digital Health Pulse</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,6 +44,10 @@
   .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
   .sidebar-item-label { font-size: 11px; color: var(--ink4); }
   .sidebar-item-val { font-size: 13px; font-weight: 500; color: var(--ink2); }
+  .inline-link { color: var(--neon-text); text-decoration: none; border-bottom: 1px solid var(--neon-dim); transition: border-color 0.15s; }
+  .inline-link:hover { border-color: var(--neon); }
+  .sidebar-link { font-size: 13px; font-weight: 500; color: var(--neon-text); text-decoration: none; word-break: break-all; }
+  .sidebar-link:hover { text-decoration: underline; }
   .interest-tag { display: inline-block; font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border2); color: var(--ink3); margin: 3px 3px 3px 0; }
   footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   .footer-left { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--ink3); display: flex; align-items: center; gap: 8px; }
@@ -59,7 +63,7 @@
     <a href="about.html" class="active">About</a>
     <a href="landscape.html">Landscape</a>
     <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <span class="nav-badge">Vol. 1 — April 12, 2026</span>
+    <span class="nav-badge" id="vol-badge">Vol. 1, April 12, 2026</span>
   </div>
 </nav>
 <div class="page">
@@ -71,13 +75,11 @@
   <div class="content">
     <div class="body-text">
       <a href="index.html" class="back-link">&#8592; Back to tracker</a>
-      <p class="lead">Healthcare is in the middle of a quiet infrastructure overhaul, and most people haven't noticed yet. This project is my attempt to document that shift in real time.</p>
-      <p>Digital health is no longer a niche corner of the industry. It's becoming the operating system underneath it. The way clinicians monitor, interpret, and act on health data is changing fundamentally, driven by AI diagnostics, real-time biosensors, predictive analytics, and platforms that are quietly rewiring how care gets delivered and paid for. The business and strategic implications of that shift are what I find most compelling.</p>
-      <p>Digital Health Pulse is my way of tracking it seriously.</p>
+      <p class="lead">Technology is changing how healthcare gets delivered, paid for and discovered. Digital Health Pulse is where I track the startups doing that work.</p>
+      <p>I'm an Economics student at UCLA and an incoming Summer Associate at L.E.K. Consulting, focused on life sciences and healthcare. Each month I profile early-stage health tech companies, from AI diagnostics to tech-driven drug discovery, and write up what I think matters about their positioning, their risks and where the market is heading.</p>
       <div class="pull-quote"><p>How does better data change decision-making in healthcare, and who controls that process?</p></div>
-      <p>I approach this space through two lenses simultaneously. The first is technical curiosity, a genuine interest in understanding how emerging tools actually work, whether that's a machine learning model surfacing disease risk from imaging data or a connected device closing the loop between patient behavior and clinical decision-making. The second is strategic thinking, analyzing how these innovations scale, where they stall, how they commercialize, and what it actually takes to integrate them into complex, resistant healthcare systems.</p>
-      <p>Through consulting, research, and work with early-stage companies, I've developed a framework I try to apply consistently here: break down complex systems, identify what actually drives outcomes, and translate that into something actionable.</p>
-      <p>This site is not a trends report. It's a synthesis of what technologies are genuinely meaningful versus overhyped, where healthcare systems are failing and where they're quietly evolving, and how business models, regulation, and incentives shape what actually gets built. That question above runs through all of it.</p>
+      <p>This isn't a trends report. It's my honest read on which technologies are genuinely meaningful and what it actually takes for them to scale inside one of the most complex industries there is.</p>
+      <p>I'm always happy to chat. Whether you're a student, a founder, a professional or an expert in the field, I'd love to meet you and hear how you see the industry. <a href="mailto:alexanderloos@g.ucla.edu" class="inline-link">Send me an email</a> or <a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener" class="inline-link">connect on LinkedIn</a>.</p>
     </div>
     <div class="sidebar">
       <div class="sidebar-card">
@@ -85,31 +87,39 @@
         <div class="sidebar-item"><span class="sidebar-item-label">University</span><span class="sidebar-item-val">UCLA</span></div>
         <div class="sidebar-item"><span class="sidebar-item-label">Major</span><span class="sidebar-item-val">Economics</span></div>
         <div class="sidebar-item"><span class="sidebar-item-label">Minor</span><span class="sidebar-item-val">Biomedical Research (anticipated)</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Organization</span><span class="sidebar-item-val">EY</span></div>
+        <div class="sidebar-item"><span class="sidebar-item-label">Incoming</span><span class="sidebar-item-val">L.E.K. Consulting, Life Sciences &amp; Healthcare</span></div>
       </div>
       <div class="sidebar-card">
         <div class="sidebar-card-label">Focus areas</div>
         <div style="padding-top:4px;">
+          <span class="interest-tag">Health Tech</span>
+          <span class="interest-tag">AI Diagnostics</span>
+          <span class="interest-tag">AI Drug Discovery</span>
           <span class="interest-tag">Digital Health</span>
           <span class="interest-tag">Healthcare Strategy</span>
-          <span class="interest-tag">AI Diagnostics</span>
-          <span class="interest-tag">Health Tech</span>
-          <span class="interest-tag">Life Sciences</span>
-          <span class="interest-tag">Value-Based Care</span>
+          <span class="interest-tag">Startups &amp; Venture</span>
         </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Get in touch</div>
+        <div class="sidebar-item"><span class="sidebar-item-label">Email</span><a href="mailto:alexanderloos@g.ucla.edu" class="sidebar-link">alexanderloos@g.ucla.edu</a></div>
+        <div class="sidebar-item"><span class="sidebar-item-label">LinkedIn</span><a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener" class="sidebar-link">linkedin.com/in/alexander-loos-</a></div>
       </div>
       <div class="sidebar-card">
         <div class="sidebar-card-label">This project</div>
         <div class="sidebar-item"><span class="sidebar-item-label">Started</span><span class="sidebar-item-val">April 2026</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Update cadence</span><span class="sidebar-item-val">Bi-weekly</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Coverage</span><span class="sidebar-item-val">US Digital Health</span></div>
+        <div class="sidebar-item"><span class="sidebar-item-label">Update cadence</span><span class="sidebar-item-val">Monthly</span></div>
+        <div class="sidebar-item"><span class="sidebar-item-label">Coverage</span><span class="sidebar-item-val">US Health Tech</span></div>
       </div>
     </div>
   </div>
   <footer>
     <div class="footer-left"><span class="nav-dot"></span>Digital Health Pulse</div>
-    <div class="footer-right">Funding data sourced from Crunchbase, PitchBook, and public press releases. Updated continuously.</div>
+    <div class="footer-right">Funding data sourced from Crunchbase, PitchBook, and public press releases. Updated monthly.</div>
   </footer>
 </div>
+<script>
+fetch('companies.json').then(r=>r.json()).then(d=>{const m=d.meta||{};if(m.volume&&m.lastUpdated)document.getElementById('vol-badge').textContent=`Vol. ${m.volume}, ${m.lastUpdated}`;}).catch(()=>{});
+</script>
 </body>
 </html>
