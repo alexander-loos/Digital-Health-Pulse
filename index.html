@@ -4,265 +4,299 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Health Pulse</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<script>
+  // Apply the saved theme before the page paints, so there is no flash.
+  (function(){ try { var t = localStorage.getItem('dhpTheme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e) {} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Light mode: paper and navy ink */
   :root {
-    --bg: #0e0f11; --bg2: #13151a; --bg3: #181b22;
-    --border: #1e2230; --border2: #252a38;
-    --ink: #e8edf8; --ink2: #9aa8c4; --ink3: #4a5570; --ink4: #2a3248;
-    --neon: #4db8ff; --neon-dim: #1a3a5a; --neon-text: #7dd4ff;
-    --r: 6px; --r-lg: 12px;
+    --paper: #F7F5F0;
+    --paper-2: #EFECE4;
+    --ink: #1A1A1A;
+    --ink-2: #45433F;
+    --ink-3: #6E6B65;
+    --rule: #D6D1C6;
+    --navy: #1C3A63;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+    color-scheme: light;
   }
+  /* Dark mode: graphite and soft navy */
+  :root[data-theme="dark"] {
+    --paper: #141414; --paper-2: #1C1C1C;
+    --ink: #EDEBE6; --ink-2: #C2BFB8; --ink-3: #8A8780;
+    --rule: #2F2F2F; --navy: #8FB0DA;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141414; --paper-2: #1C1C1C;
+      --ink: #EDEBE6; --ink-2: #C2BFB8; --ink-3: #8A8780;
+      --rule: #2F2F2F; --navy: #8FB0DA;
+      color-scheme: dark;
+    }
+  }
+
   html { font-size: 16px; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; min-height: 100vh; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--ink); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 500; }
-  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--neon); display: inline-block; }
-  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-  .nav-links a { font-size: 13px; color: var(--ink3); text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--ink2); }
-  .nav-links a.active { color: var(--neon-text); }
-  .nav-badge { font-size: 11px; background: var(--neon-dim); color: var(--neon-text); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
-  .page { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
-  .hero { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
-  .hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neon-text); font-weight: 500; margin-bottom: 1.25rem; }
-  .hero-eyebrow-line { width: 22px; height: 1px; background: var(--neon); }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 64px); color: var(--ink); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 1.25rem; font-weight: 500; }
-  .hero-desc { font-size: 15px; color: var(--ink3); max-width: 560px; line-height: 1.75; margin-bottom: 2rem; }
-  .hero-meta { display: flex; gap: 2.5rem; flex-wrap: wrap; }
-  .hero-meta-item { display: flex; flex-direction: column; gap: 3px; }
-  .hero-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); }
-  .hero-meta-val { font-size: 15px; font-weight: 500; color: var(--ink2); }
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2.5rem; }
-  .stat-card { background: var(--bg); padding: 1.25rem 1.5rem; }
-  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--ink); letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; font-weight: 500; }
-  .stat-lbl { font-size: 11px; color: var(--ink3); }
-  .controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 1.25rem; }
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-  .filter-label { font-size: 11px; color: var(--ink4); margin-right: 4px; }
-  .filter-btn { font-size: 12px; font-family: 'DM Sans', sans-serif; padding: 5px 13px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; color: var(--ink3); cursor: pointer; transition: all 0.15s; }
-  .filter-btn:hover { border-color: var(--ink3); color: var(--ink2); }
-  .filter-btn.active { background: var(--neon-dim); border-color: var(--neon); color: var(--neon-text); }
-  .sort-wrap { display: flex; align-items: center; gap: 8px; }
-  .sort-label { font-size: 11px; color: var(--ink4); }
-  select { font-size: 12px; font-family: 'DM Sans', sans-serif; padding: 5px 10px; border: 1px solid var(--border2); border-radius: var(--r); background: var(--bg2); color: var(--ink2); cursor: pointer; }
-  .table-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; gap: 1rem; padding: 0 1.5rem 10px; }
-  .table-col-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); font-weight: 500; }
-  .cards { display: flex; flex-direction: column; gap: 8px; }
-  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: border-color 0.15s; }
-  .card:hover { border-color: var(--border2); }
-  .card-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; align-items: center; }
-  .company-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
-  .company-url { font-size: 11px; color: var(--ink4); }
-  .tag { display: inline-block; font-size: 11px; font-weight: 400; padding: 3px 10px; border-radius: 3px; }
-  .tag-teal { background: #0f2a22; color: #4dc4a0; }
-  .tag-blue { background: var(--neon-dim); color: var(--neon-text); }
-  .tag-purple { background: #1e1535; color: #9878d8; }
-  .tag-amber { background: #2a1e0a; color: #d4944a; }
-  .tag-coral { background: #2a1210; color: #d4705a; }
-  .tag-gray { background: #1e2028; color: #7888a8; }
-  .tag-cyan { background: #0a2a33; color: #6fd3e3; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.55; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Masthead */
+  .masthead { border-top: 6px solid var(--navy); }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.9rem 0; border-bottom: 1px solid var(--ink); flex-wrap: wrap; }
+  .topbar-name { font-family: var(--serif); font-weight: 600; font-size: 17px; text-decoration: none; }
+  .nav { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+  .nav a { font-size: 14px; color: var(--ink-2); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .nav a:hover { color: var(--ink); }
+  .nav a.active { color: var(--ink); border-bottom-color: var(--navy); font-weight: 500; }
+  .tools { display: flex; align-items: center; gap: 1rem; }
+  .tool-btn { font-family: var(--sans); font-size: 13px; color: var(--ink-2); background: none; border: 1px solid var(--rule); padding: 5px 10px; cursor: pointer; }
+  .tool-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* Volume picker */
   .vol-wrap { position: relative; }
-  .vol-btn { font-family: 'DM Sans', sans-serif; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-  .vol-btn:hover { border-color: var(--neon); }
-  .vol-caret { font-size: 9px; opacity: 0.8; }
-  .vol-menu { display: none; position: absolute; right: 0; top: calc(100% + 8px); background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r-lg); padding: 6px; min-width: 200px; z-index: 20; box-shadow: 0 12px 30px rgba(0,0,0,0.45); }
+  .vol-caret { font-size: 9px; margin-left: 4px; }
+  .vol-menu { display: none; position: absolute; right: 0; top: calc(100% + 6px); background: var(--paper); border: 1px solid var(--ink); border-top: 3px solid var(--navy); min-width: 220px; z-index: 20; }
   .vol-menu.open { display: block; }
-  .vol-item { display: flex; justify-content: space-between; align-items: center; width: 100%; background: transparent; border: none; color: var(--ink2); font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 8px 10px; border-radius: var(--r); cursor: pointer; text-align: left; }
-  .vol-item:hover { background: var(--bg3); color: var(--ink); }
-  .vol-item.active { color: var(--neon-text); }
-  .vol-item-sub { font-size: 11px; color: var(--ink4); }
-  .vol-note { font-size: 12px; color: var(--ink3); margin: -0.75rem 0 1.5rem; display: none; }
+  .vol-item { display: flex; justify-content: space-between; width: 100%; background: none; border: none; border-bottom: 1px solid var(--rule); color: var(--ink); font-family: var(--sans); font-size: 13px; padding: 10px 12px; cursor: pointer; text-align: left; }
+  .vol-item:last-child { border-bottom: none; }
+  .vol-item:hover { background: var(--paper-2); }
+  .vol-item.active { color: var(--navy); font-weight: 600; }
+  .vol-item-sub { color: var(--ink-3); font-weight: 400; }
+
+  /* Nameplate hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3rem; align-items: center; padding: 3.5rem 0 3rem; }
+  .nameplate { font-family: var(--serif); font-weight: 700; font-size: clamp(52px, 8.4vw, 104px); line-height: 0.95; letter-spacing: -0.025em; margin-bottom: 1.75rem; }
+  .hero-desc { font-family: var(--serif); font-size: 21px; line-height: 1.5; color: var(--ink-2); max-width: 34em; margin-bottom: 1.75rem; }
+  .vol-note { font-size: 15px; color: var(--ink-2); border-left: 3px solid var(--navy); padding-left: 12px; margin-bottom: 1.5rem; display: none; max-width: 40em; }
   .vol-note.show { display: block; }
-  .funding-amount { font-size: 14px; font-weight: 500; color: var(--ink2); }
-  .funding-total { font-size: 11px; color: var(--ink4); }
-  .stage-pill { display: inline-block; font-size: 11px; padding: 3px 10px; border: 1px solid var(--border2); border-radius: 20px; color: var(--ink3); white-space: nowrap; }
-  .score-dots { display: flex; gap: 4px; align-items: center; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; }
-  .dot-on { background: var(--neon); }
-  .dot-off { background: var(--border2); }
-  .toggle-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border2); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-size: 14px; color: var(--ink3); justify-self: end; font-family: 'DM Sans', sans-serif; }
-  .toggle-btn:hover { background: var(--bg3); color: var(--ink); }
-  .toggle-btn.open { background: var(--neon-dim); color: var(--neon-text); border-color: var(--neon); }
-  .card-body { display: none; border-top: 1px solid var(--border); padding: 1.5rem; background: var(--bg3); }
-  .card-body.open { display: block; }
-  .card-body-inner { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; }
-  .take-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); font-weight: 500; margin-bottom: 10px; }
-  .take-text { font-size: 14px; color: var(--ink3); line-height: 1.8; }
-  .meta-grid { display: flex; flex-direction: column; gap: 12px; }
-  .meta-row-item { display: flex; flex-direction: column; gap: 2px; }
-  .meta-row-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink4); }
-  .meta-row-val { font-size: 13px; color: var(--ink2); font-weight: 500; }
-  .updated-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink4); margin-top: 12px; }
-  .updated-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--neon); }
-  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--ink3); display: flex; align-items: center; gap: 8px; }
-  .footer-right { font-size: 12px; color: var(--ink4); }
-  @media (max-width: 720px) { .card-header { grid-template-columns: 1fr auto; } .hide-sm { display: none; } .table-header { display: none; } .card-body-inner { grid-template-columns: 1fr; } nav { padding: 1rem; } .page { padding: 0 1rem 4rem; } .hero { padding: 3rem 0 2.5rem; } }
+  .hero-actions { display: flex; align-items: baseline; gap: 2rem; flex-wrap: wrap; }
+  .subscribe { display: inline-block; background: var(--navy); color: var(--paper); font-size: 15px; font-weight: 500; padding: 11px 20px; text-decoration: none; }
+  .subscribe:hover { background: var(--ink); }
+  .hero-meta { font-size: 14px; color: var(--ink-3); }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+  .helix { width: 100%; aspect-ratio: 526 / 618; background: var(--navy); -webkit-mask: url(helix.png) center / contain no-repeat; mask: url(helix.png) center / contain no-repeat; opacity: 0.9; }
 
-  .page, nav { position: relative; z-index: 1; }
+  /* Stat strip: open columns between rules */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .stat { padding: 1.4rem 1.5rem 1.3rem; border-left: 1px solid var(--rule); }
+  .stat:first-child { border-left: none; padding-left: 0; }
+  .stat-num { font-family: var(--serif); font-weight: 600; font-size: 40px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .stat-lbl { font-size: 14px; color: var(--ink-3); }
 
-  
+  /* Tracker section */
+  .section { margin-top: 3.5rem; border-top: 4px solid var(--navy); padding-top: 1rem; }
+  .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .section-title { font-family: var(--serif); font-weight: 600; font-size: 34px; letter-spacing: -0.015em; }
+  .sort-wrap { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-3); }
+  select { font-family: var(--sans); font-size: 14px; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 5px 8px; cursor: pointer; }
+  .filters { display: flex; gap: 1.4rem; flex-wrap: wrap; padding-bottom: 0.9rem; border-bottom: 1px solid var(--rule); margin-bottom: 0.25rem; }
+  .filter-btn { font-family: var(--sans); font-size: 14px; color: var(--ink-3); background: none; border: none; border-bottom: 2px solid transparent; padding: 2px 0; cursor: pointer; }
+  .filter-btn:hover { color: var(--ink); }
+  .filter-btn.active { color: var(--ink); border-bottom-color: var(--navy); font-weight: 500; }
 
-  .helix-bg {
-    position: fixed;
-    top: 50%;
-    right: -80px;
-    transform: translateY(-50%);
-    width: 650px;
-    height: 650px;
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-    animation: none; transform: translateY(-70%) translateX(-20px) scale(1.05);
+  .cols { display: grid; grid-template-columns: 2.1fr 1.3fr 1.4fr 1fr 150px 32px; gap: 1.25rem; align-items: center; }
+  .table-header { padding: 0.9rem 0 0.6rem; border-bottom: 2px solid var(--ink); font-size: 13px; font-weight: 500; color: var(--ink-3); }
+  .table-header .r { text-align: right; }
+  .row { border-bottom: 1px solid var(--rule); }
+  .row-head { padding: 1.15rem 0; cursor: pointer; }
+  .row-head:hover .company-name { color: var(--navy); }
+  .company-name { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.2; }
+  .company-url { font-size: 13px; color: var(--ink-3); }
+  .sector { font-size: 14px; color: var(--ink-2); }
+  .funding-amount { font-size: 15px; font-weight: 500; }
+  .funding-sub { font-size: 13px; color: var(--ink-3); }
+  .stage { font-size: 14px; color: var(--ink-2); }
+  .momentum { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
+  .bar { flex: 1; max-width: 90px; height: 6px; background: var(--rule); }
+  .bar span { display: block; height: 100%; background: var(--navy); }
+  .score { font-size: 14px; font-weight: 600; min-width: 2.2em; text-align: right; }
+  .toggle-btn { width: 28px; height: 28px; border: 1px solid var(--rule); background: none; color: var(--ink-2); font-family: var(--sans); font-size: 16px; line-height: 1; cursor: pointer; justify-self: end; }
+  .row-head:hover .toggle-btn { border-color: var(--ink); color: var(--ink); }
+  .toggle-btn.open, .row-head:hover .toggle-btn.open { background: var(--navy); border-color: var(--navy); color: var(--paper); }
+
+  .row-body { display: none; padding: 0.5rem 0 2rem; }
+  .row-body.open { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 3rem; }
+  .take-title { font-family: var(--serif); font-weight: 600; font-size: 17px; margin-bottom: 0.5rem; }
+  .take-text { font-family: var(--serif); font-size: 17px; line-height: 1.7; color: var(--ink-2); max-width: 38em; }
+  .take-vol { font-size: 13px; color: var(--ink-3); margin-top: 1rem; }
+  .facts { border-top: 2px solid var(--ink); }
+  .fact { display: flex; justify-content: space-between; gap: 1rem; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+  .fact dt { color: var(--ink-3); }
+  .fact dd { text-align: right; font-weight: 500; }
+
+  footer { margin-top: 5rem; border-top: 4px solid var(--navy); padding: 1.25rem 0 3rem; display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .footer-name { font-family: var(--serif); font-weight: 600; font-size: 17px; }
+  .footer-note { font-size: 13px; color: var(--ink-3); max-width: 36em; }
+
+  /* One quiet entrance: the top rule draws across, then the nameplate settles in */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-intro .masthead { border-top-color: transparent; position: relative; }
+    .js-intro .masthead::before { content: ""; position: absolute; top: -6px; left: 0; height: 6px; width: 0; background: var(--navy); animation: drawRule 0.7s cubic-bezier(.6,0,.2,1) forwards; }
+    .js-intro .hero { opacity: 0; animation: settle 0.6s ease 0.45s forwards; }
+    @keyframes drawRule { to { width: 100%; } }
+    @keyframes settle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   }
-  .helix-bg img { width: 100%; height: 100%; object-fit: contain; }
-  @keyframes helixFloat {
-    0%   { transform: translateY(-50%) translateX(0px) scale(1); }
-    25%  { transform: translateY(-70%) translateX(-20px) scale(1.05); }
-    50%  { transform: translateY(-30%) translateX(10px) scale(0.96); }
-    75%  { transform: translateY(-65%) translateX(-10px) scale(1.03); }
-    100% { transform: translateY(-50%) translateX(0px) scale(1); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr 160px; gap: 1.5rem; }
+    .hero-desc { font-size: 18px; }
+    .cols { grid-template-columns: 1fr auto 32px; }
+    .hide-sm { display: none; }
+    .table-header { display: none; }
+    .row-body.open { grid-template-columns: 1fr; gap: 1.5rem; }
   }
-  .page, nav { position: relative; z-index: 1; }
-  nav { z-index: 30; }
-  /* Heat map intro: plays once per visit */
-  #intro { position: fixed; inset: 0; background: #06070a; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; z-index: 100; cursor: pointer; }
-  #intro.done { opacity: 0; pointer-events: none; }
-  #heat { position: absolute; inset: 0; width: 100%; height: 100%; }
-  #word { position: relative; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(30px, 4vw, 44px); font-weight: 500; white-space: nowrap; color: #f4efe6; letter-spacing: 0.01em; opacity: 0; transition: opacity 0.25s ease; }
-  #skip { position: absolute; bottom: 22px; right: 26px; font: 12px/1 system-ui, sans-serif; color: rgba(255,255,255,0.35); }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 1.1rem; }
+    .hero { grid-template-columns: 1fr; padding-top: 2.5rem; }
+    .helix { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: none; padding-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+    .stat-num { font-size: 32px; }
+    .momentum .bar { display: none; }
+  }
 </style>
 </head>
 <body>
-<div id="intro" aria-hidden="true">
-  <canvas id="heat"></canvas>
-  <div id="word">Digital Health Pulse</div>
-  <div id="skip">Click to skip</div>
-</div>
-<div class="helix-bg"><img src="DHPlogo.png" alt=""></div>
-<nav>
-  <a href="index.html" class="nav-logo"><span class="nav-dot"></span>Digital Health Pulse</a>
-  <div class="nav-links">
-    <a href="index.html" class="active">Tracker</a>
-    <a href="about.html">About</a>
-    <a href="landscape.html">Landscape</a>
-    <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <div class="vol-wrap">
-      <button class="nav-badge vol-btn" id="vol-badge" onclick="toggleVolMenu(event)">Vol. 1, April 2026 <span class="vol-caret">&#9662;</span></button>
-      <div class="vol-menu" id="vol-menu"></div>
-    </div>
-  </div>
-</nav>
-<div class="page">
-  <div class="hero">
-    <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Ongoing research</div>
-    <h1 class="hero-title">Digital Health Pulse</h1>
-    <p class="vol-note" id="vol-note"></p>
-    <p class="hero-desc">Tracking the startups building technology for healthcare, from AI diagnostics to tech-driven drug discovery, with analyst commentary on positioning, differentiation and strategic risk.</p>
-    <a href="newsletter.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--neon-dim);color:var(--neon-text);font-size:13px;font-weight:500;padding:10px 20px;border-radius:6px;text-decoration:none;border:1px solid var(--neon);margin-bottom:2rem;transition:opacity 0.15s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">Subscribe to the newsletter <span style="font-size:14px;">→</span></a>
-  <div class="hero-meta">
-      <div class="hero-meta-item"><span class="hero-meta-label">Entries</span><span class="hero-meta-val" id="hero-count">5</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Last updated</span><span class="hero-meta-val" id="hero-updated">April 12, 2026</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Coverage</span><span class="hero-meta-val" id="hero-coverage">US Health Tech</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Most recent entry</span><span class="hero-meta-val" id="hero-recent">April 12, 2026</span></div>
-    </div>
-  </div>
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-num" id="stat-funding">$1.9B+</div><div class="stat-lbl">Total funding tracked</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-count">5</div><div class="stat-lbl">Companies profiled</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-sectors">5</div><div class="stat-lbl">Sub-sectors covered</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-recent">Apr '26</div><div class="stat-lbl">Most recent entry</div></div>
-  </div>
-  <div class="controls">
-    <div class="filters">
-      <span class="filter-label">Filter</span>
-      <button class="filter-btn active" onclick="filterBy('all',this)">All</button>
-    </div>
-    <div class="sort-wrap">
-      <span class="sort-label">Sort by</span>
-      <select onchange="sortBy(this.value)">
-        <option value="default">Date added</option>
-        <option value="score">Momentum</option>
-        <option value="name">Name</option>
-      </select>
-    </div>
-  </div>
-  <div class="table-header">
-    <span class="table-col-label">Company</span>
-    <span class="table-col-label">Sub-sector</span>
-    <span class="table-col-label">Latest funding</span>
-    <span class="table-col-label">Stage</span>
-    <span class="table-col-label">Momentum</span>
-  </div>
-  <div class="cards" id="cards-container"></div>
-  <footer>
-    <div class="footer-left"><span class="nav-dot"></span>Digital Health Pulse</div>
-    <div class="footer-right">Funding data sourced from Crunchbase, PitchBook, and public press releases. Updated monthly.</div>
-  </footer>
-</div>
 <script>
-// Company data now lives in companies.json, so updates only touch that file.
-let allCompanies = [];
-let companies = [];
-let filtered = [];
-let volumes = [];
-let currentVol = null;
+  // Play the entrance once per visit.
+  (function(){ try { if (!sessionStorage.getItem('dhpIntroSeen')) { document.documentElement.classList.add('js-intro'); sessionStorage.setItem('dhpIntroSeen','1'); } } catch(e) {} })();
+</script>
+<header class="masthead">
+  <div class="wrap">
+    <div class="topbar">
+      <a href="index.html" class="topbar-name">Digital Health Pulse</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html" class="active">Tracker</a>
+        <a href="about.html">About</a>
+        <a href="landscape.html">Landscape</a>
+        <a href="newsletter.html">Newsletter</a>
+      </nav>
+      <div class="tools">
+        <div class="vol-wrap">
+          <button class="tool-btn" id="vol-badge" onclick="toggleVolMenu(event)" aria-haspopup="true">Vol. 1, April 2026 <span class="vol-caret">&#9662;</span></button>
+          <div class="vol-menu" id="vol-menu"></div>
+        </div>
+        <button class="tool-btn" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1 class="nameplate">Digital Health Pulse</h1>
+      <p class="vol-note" id="vol-note"></p>
+      <p class="hero-desc">Tracking the startups building technology for healthcare, from AI diagnostics to tech-driven drug discovery, with analyst commentary on positioning, differentiation and strategic risk.</p>
+      <div class="hero-actions">
+        <a href="newsletter.html" class="subscribe">Subscribe to the newsletter</a>
+        <p class="hero-meta">Updated <strong id="hero-updated">April 12, 2026</strong>, covering <strong id="hero-coverage">US Health Tech</strong></p>
+      </div>
+    </div>
+    <div class="helix" role="img" aria-label="DNA helix"></div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="stat-funding">$1.9B+</div><div class="stat-lbl">Total funding tracked</div></div>
+    <div class="stat"><div class="stat-num" id="stat-count">5</div><div class="stat-lbl">Companies profiled</div></div>
+    <div class="stat"><div class="stat-num" id="stat-sectors">5</div><div class="stat-lbl">Sub-sectors covered</div></div>
+    <div class="stat"><div class="stat-num" id="stat-recent">Apr '26</div><div class="stat-lbl">Most recent entry</div></div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Tracker</h2>
+      <label class="sort-wrap">Sort by
+        <select onchange="sortBy(this.value)">
+          <option value="default">Date added</option>
+          <option value="score">Momentum</option>
+          <option value="name">Name</option>
+        </select>
+      </label>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterBy('all',this)">All sectors</button>
+    </div>
+    <div class="table-header cols">
+      <span>Company</span>
+      <span>Sub-sector</span>
+      <span>Latest funding</span>
+      <span>Stage</span>
+      <span class="r">Momentum</span>
+      <span></span>
+    </div>
+    <div id="cards-container"></div>
+  </section>
+
+  <footer>
+    <div class="footer-name">Digital Health Pulse</div>
+    <p class="footer-note">Funding data sourced from Crunchbase, PitchBook and public press releases. Updated monthly.</p>
+  </footer>
+</main>
+
+<script>
+// Company data lives in companies.json, so updates only touch that file.
+let allCompanies = [], companies = [], filtered = [], volumes = [], currentVol = null;
 function parseMoney(s){ const m=String(s).match(/([\d.]+)\s*([MB])/i); if(!m) return 0; return parseFloat(m[1])*(m[2].toUpperCase()==='B'?1000:1); }
 function fmtMoney(mil){ return mil>=1000 ? '$'+(mil/1000).toFixed(1)+'B' : '$'+Math.round(mil)+'M'; }
-function scoreToDots(s){ return s>5 ? Math.round(s/20) : s; }
 function normScore(s){ return s>5 ? s : s*20; }
 function scoreLabel(s){ return s>5 ? s+' / 100' : s+' / 5'; }
-function dots(s){ const n=scoreToDots(s); return Array.from({length:5},(_,i)=>`<div class="dot ${i<n?'dot-on':'dot-off'}"></div>`).join(''); }
+function shortScore(s){ return s>5 ? String(s) : s+'/5'; }
+function volText(n){ const v=volumes.find(x=>x.number===n); return v?`Vol. ${v.number}, ${v.label}`:''; }
 function renderCards(data){
   const container = document.getElementById('cards-container');
   container.innerHTML = '';
   data.forEach((c,i)=>{
-    const card = document.createElement('div'); card.className='card';
-    card.innerHTML=`
-      <div class="card-header" onclick="toggleCard(${i})">
+    const row = document.createElement('div'); row.className='row';
+    row.innerHTML=`
+      <div class="row-head cols" onclick="toggleCard(${i})">
         <div><div class="company-name">${c.name}</div><div class="company-url">${c.url}</div></div>
-        <div><span class="tag ${c.tagClass}">${c.sector}</span></div>
-        <div class="hide-sm"><div class="funding-amount">${c.funding} <span style="font-size:11px;font-weight:400;color:var(--ink4)">${c.fundingDate}</span></div><div class="funding-total">${c.leadInvestor} · ${c.totalRaised} total</div></div>
-        <div class="hide-sm"><span class="stage-pill">${c.stage}</span></div>
-        <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;">
-          <div class="score-dots hide-sm">${dots(c.score)}</div>
-          <button class="toggle-btn" id="btn-${i}">+</button>
-        </div>
+        <div class="sector hide-sm">${c.sector}</div>
+        <div class="hide-sm"><div class="funding-amount">${c.funding}, ${c.fundingDate}</div><div class="funding-sub">${c.totalRaised} total, led by ${c.leadInvestor}</div></div>
+        <div class="stage hide-sm">${c.stage}</div>
+        <div class="momentum"><div class="bar"><span style="width:${normScore(c.score)}%"></span></div><span class="score">${shortScore(c.score)}</span></div>
+        <button class="toggle-btn" id="btn-${i}" aria-expanded="false" aria-label="Show analyst take for ${c.name}">+</button>
       </div>
-      <div class="card-body" id="body-${i}">
-        <div class="card-body-inner">
-          <div>
-            <div class="take-label">Analyst take</div>
-            <p class="take-text">${c.take}</p>
-            <div class="updated-chip"><div class="updated-dot"></div>${(()=>{const v=volumes.find(x=>x.number===c.volume);return v?`Vol. ${v.number}, ${v.label}`:"";})()}</div>
-          </div>
-          <div class="meta-grid">
-            <div class="meta-row-item"><span class="meta-row-label">Sub-sector</span><span class="meta-row-val">${c.sector}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Stage</span><span class="meta-row-val">${c.stage}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Latest round</span><span class="meta-row-val">${c.funding}, ${c.fundingDate}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Total raised</span><span class="meta-row-val">${c.totalRaised}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Lead investor</span><span class="meta-row-val">${c.leadInvestor}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Business model</span><span class="meta-row-val">${c.model}</span></div>
-            <div class="meta-row-item"><span class="meta-row-label">Momentum score</span><span class="meta-row-val">${scoreLabel(c.score)}</span></div>
-          </div>
+      <div class="row-body" id="body-${i}">
+        <div>
+          <h3 class="take-title">Analyst take</h3>
+          <p class="take-text">${c.take}</p>
+          <p class="take-vol">${volText(c.volume)}</p>
         </div>
+        <dl class="facts">
+          <div class="fact"><dt>Sub-sector</dt><dd>${c.sector}</dd></div>
+          <div class="fact"><dt>Stage</dt><dd>${c.stage}</dd></div>
+          <div class="fact"><dt>Latest round</dt><dd>${c.funding}, ${c.fundingDate}</dd></div>
+          <div class="fact"><dt>Total raised</dt><dd>${c.totalRaised}</dd></div>
+          <div class="fact"><dt>Lead investor</dt><dd>${c.leadInvestor}</dd></div>
+          <div class="fact"><dt>Business model</dt><dd>${c.model}</dd></div>
+          <div class="fact"><dt>Momentum score</dt><dd>${scoreLabel(c.score)}</dd></div>
+        </dl>
       </div>`;
-    container.appendChild(card);
+    container.appendChild(row);
   });
-  document.getElementById('hero-count').textContent = companies.length;
   document.getElementById('stat-count').textContent = companies.length;
 }
 function toggleCard(i){
   const body=document.getElementById(`body-${i}`), btn=document.getElementById(`btn-${i}`);
   const open=body.classList.toggle('open');
-  btn.classList.toggle('open',open); btn.textContent=open?'×':'+';
+  btn.classList.toggle('open',open); btn.textContent=open?'×':'+'; btn.setAttribute('aria-expanded',open);
 }
 function filterBy(sector,el){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   filtered=sector==='all'?[...companies]:companies.filter(c=>c.sector===sector);
+  document.querySelector('.sort-wrap select').value='default';
   renderCards(filtered);
 }
 function sortBy(val){
@@ -279,13 +313,9 @@ function buildFilters(){
     b.onclick=()=>filterBy(s,b); wrap.appendChild(b);
   });
 }
-function fmtDate(d,opts){ return d.toLocaleDateString('en-US',opts); }
 function updateStats(){
   const recent=companies.map(c=>c.added).filter(Boolean).map(d=>new Date(d)).sort((a,b)=>b-a)[0];
-  if(recent){
-    document.getElementById('hero-recent').textContent=fmtDate(recent,{month:'long',day:'numeric',year:'numeric'});
-    document.getElementById('stat-recent').textContent=fmtDate(recent,{month:'short'})+" '"+String(recent.getFullYear()).slice(2);
-  }
+  if(recent) document.getElementById('stat-recent').textContent=recent.toLocaleDateString('en-US',{month:'short'})+" '"+String(recent.getFullYear()).slice(2);
   document.getElementById('stat-funding').textContent=fmtMoney(companies.reduce((t,c)=>t+parseMoney(c.totalRaised),0))+'+';
   document.getElementById('stat-sectors').textContent=new Set(companies.map(c=>c.sector)).size;
 }
@@ -324,112 +354,23 @@ fetch('companies.json').then(r=>r.json()).then(data=>{
   if(m.coverage) document.getElementById('hero-coverage').textContent=m.coverage;
   const q=new URLSearchParams(location.search).get('vol');
   const latest=volumes[volumes.length-1].number;
-  let start = q==='all' ? 'all' : (volumes.some(v=>String(v.number)===q) ? Number(q) : latest);
-  setVolume(start);
+  setVolume(q==='all' ? 'all' : (volumes.some(v=>String(v.number)===q) ? Number(q) : latest));
 });
-</script>
-<script>
-(function(){
-  const intro = document.getElementById('intro');
-  const canvas = document.getElementById('heat');
-  const word = document.getElementById('word');
-  const ctx = canvas.getContext('2d');
-  const DURATION = 2.2;          // seconds of heat animation
-  const SPACING = 7;             // dot grid spacing in px
-  let W, H, dpr;
 
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  // thermal colour ramp: navy -> blue -> teal -> orange -> peach
-  const stops = [
-    [0.00, [10, 12, 22]],
-    [0.25, [24, 60, 170]],
-    [0.45, [40, 150, 190]],
-    [0.62, [120, 150, 110]],
-    [0.78, [235, 120, 55]],
-    [1.00, [255, 196, 150]]
-  ];
-  function ramp(h){
-    h = Math.max(0, Math.min(1, h));
-    for (let i = 1; i < stops.length; i++){
-      if (h <= stops[i][0]){
-        const [a, ca] = stops[i-1], [b, cb] = stops[i];
-        const t = (h - a) / (b - a);
-        return [ca[0] + (cb[0]-ca[0])*t, ca[1] + (cb[1]-ca[1])*t, ca[2] + (cb[2]-ca[2])*t];
-      }
-    }
-    return stops[stops.length-1][1];
-  }
-
-  const easeOut = t => 1 - Math.pow(1 - t, 3);
-  const easeInOut = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-
-  function draw(t){
-    const p = Math.min(t / DURATION, 1);
-    const cx = W / 2, cy = H / 2;
-    const maxR = Math.hypot(W, H) * 0.75;
-    // radius: brief glowing dot, then a fast ease-out expansion past the edges
-    const grow = p < 0.14 ? 0 : easeInOut((p - 0.14) / 0.86);
-    const R = 10 + grow * maxR;
-    const thick = 22 + R * 0.28;
-    const intensity = Math.min(1, p / 0.06) * (1 - Math.max(0, (p - 0.85) / 0.15) * 0.6);
-
-    ctx.fillStyle = '#06070a';
-    ctx.fillRect(0, 0, W, H);
-    const r = SPACING * 0.36;
-    for (let y = SPACING / 2; y < H; y += SPACING){
-      for (let x = SPACING / 2; x < W; x += SPACING){
-        const dx = x - cx, dy = y - cy;
-        const d = Math.hypot(dx, dy);
-        const a = Math.atan2(dy, dx);
-        // wobble the ring so it reads as an organic heat shape, not a perfect circle
-        const wob = 1 + 0.08 * Math.sin(3*a + t*2.1) + 0.045 * Math.sin(5*a - t*3.3) + 0.025 * Math.sin(9*a + t*1.7);
-        const rr = R * wob;
-        const z = (d - rr) / thick;
-        let h = Math.exp(-z*z) * intensity;
-        // the outer side of the ring cools toward blue, the inner side stays warm
-        if (z > 0) h *= 0.72;
-        if (h < 0.035) { ctx.fillStyle = 'rgb(16,18,28)'; }
-        else { const c = ramp(h); ctx.fillStyle = `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`; }
-        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-      }
-    }
-    word.style.opacity = (p > 0.24 && p < 0.9) ? 1 : 0;
-  }
-
-  function finish(){
-    intro.classList.add('done');
-    try { sessionStorage.setItem('dhpIntroSeen', '1'); } catch(e) {}
-    setTimeout(() => intro.remove(), 600);
-  }
-
-  // expose a frame renderer for previews; normal visitors use the live loop below
-  window.__renderIntroAt = t => { resize(); draw(t); };
-
-  let seen = false;
-  try { seen = sessionStorage.getItem('dhpIntroSeen') === '1'; } catch(e) {}
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (window.__previewMode) { resize(); return; }
-  if (seen || reduce) { intro.remove(); return; }
-
-  resize();
-  window.addEventListener('resize', resize);
-  intro.addEventListener('click', finish);
-  let start = null;
-  function frame(ts){
-    if (!document.body.contains(intro)) return;
-    if (start === null) start = ts;
-    const t = (ts - start) / 1000;
-    draw(t);
-    if (t < DURATION) requestAnimationFrame(frame); else finish();
-  }
-  requestAnimationFrame(frame);
-})();
+// Light/dark toggle. With no saved choice, the site follows the visitor's device.
+function isDark(){
+  const t=document.documentElement.getAttribute('data-theme');
+  return t ? t==='dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function syncThemeBtn(){ document.getElementById('theme-btn').textContent = isDark() ? 'Light mode' : 'Dark mode'; }
+function toggleTheme(){
+  const next = isDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('dhpTheme', next); } catch(e) {}
+  syncThemeBtn();
+}
+syncThemeBtn();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeBtn);
 </script>
 </body>
 </html>
