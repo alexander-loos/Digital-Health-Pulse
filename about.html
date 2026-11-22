@@ -4,122 +4,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About | Digital Health Pulse</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0e0f11; --bg2: #13151a; --bg3: #181b22;
-    --border: #1e2230; --border2: #252a38;
-    --ink: #e8edf8; --ink2: #9aa8c4; --ink3: #4a5570; --ink4: #2a3248;
-    --neon: #4db8ff; --neon-dim: #1a3a5a; --neon-text: #7dd4ff;
-    --r: 6px; --r-lg: 12px;
+  .about-head { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 3rem; align-items: end; }
+  .portrait { width: 220px; height: 260px; object-fit: cover; display: block; filter: grayscale(0.15); }
+  .content { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 5rem; align-items: start; margin-top: 2.5rem; }
+  .body-text p { font-family: var(--serif); font-size: 18px; line-height: 1.75; color: var(--ink-2); margin-bottom: 1.4rem; max-width: 36em; }
+  .pull { margin: 2.25rem 0; max-width: 36em; }
+  .pull p { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; color: var(--navy); margin: 1.1rem 0 !important; }
+  .side-block { margin-bottom: 2.25rem; }
+  .side-block .sub-title { padding-top: 0.6rem; margin-bottom: 0.25rem; }
+  .side-text { font-size: 14px; color: var(--ink-2); line-height: 1.7; padding-top: 0.5rem; }
+  .fact a { color: var(--navy); text-decoration: none; }
+  .fact a:hover { text-decoration: underline; }
+  @media (max-width: 860px) {
+    .content { grid-template-columns: 1fr; gap: 2.5rem; }
   }
-  html { font-size: 16px; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; min-height: 100vh; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--ink); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 500; }
-  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--neon); display: inline-block; }
-  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-  .nav-links a { font-size: 13px; color: var(--ink3); text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--ink2); }
-  .nav-links a.active { color: var(--neon-text); }
-  .nav-badge { font-size: 11px; background: var(--neon-dim); color: var(--neon-text); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
-  .page { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
-  .hero { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3.5rem; }
-  .hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neon-text); font-weight: 500; margin-bottom: 1.25rem; }
-  .hero-eyebrow-line { width: 22px; height: 1px; background: var(--neon); }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); color: var(--ink); line-height: 1.02; letter-spacing: -0.02em; font-weight: 500; }
-  .content { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; align-items: start; }
-  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink3); text-decoration: none; margin-bottom: 2rem; transition: color 0.15s; }
-  .back-link:hover { color: var(--ink2); }
-  .body-text p { font-size: 15px; color: var(--ink3); line-height: 1.85; margin-bottom: 1.5rem; }
-  .body-text p:last-child { margin-bottom: 0; }
-  .body-text p.lead { font-size: 17px; color: var(--ink2); line-height: 1.75; margin-bottom: 2rem; }
-  .pull-quote { border-left: 2px solid var(--neon); padding: 1rem 0 1rem 1.5rem; margin: 2.5rem 0; }
-  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); line-height: 1.5; font-style: italic; margin: 0 !important; }
-  .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.25rem 1.5rem; }
-  .sidebar-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); font-weight: 500; margin-bottom: 12px; }
-  .sidebar-item { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-  .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .sidebar-item-label { font-size: 11px; color: var(--ink4); }
-  .sidebar-item-val { font-size: 13px; font-weight: 500; color: var(--ink2); }
-  .inline-link { color: var(--neon-text); text-decoration: none; border-bottom: 1px solid var(--neon-dim); transition: border-color 0.15s; }
-  .inline-link:hover { border-color: var(--neon); }
-  .sidebar-link { font-size: 13px; font-weight: 500; color: var(--neon-text); text-decoration: none; word-break: break-all; }
-  .sidebar-link:hover { text-decoration: underline; }
-  .interest-tag { display: inline-block; font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border2); color: var(--ink3); margin: 3px 3px 3px 0; }
-  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--ink3); display: flex; align-items: center; gap: 8px; }
-  .footer-right { font-size: 12px; color: var(--ink4); }
-  @media (max-width: 720px) { .content { grid-template-columns: 1fr; gap: 2.5rem; } nav { padding: 1rem; } .page { padding: 0 1rem 4rem; } .hero { padding: 3rem 0 2.5rem; } }
+  @media (max-width: 600px) {
+    .about-head { grid-template-columns: 1fr; gap: 1.5rem; }
+    .portrait { width: 160px; height: 190px; }
+  }
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><span class="nav-dot"></span>Digital Health Pulse</a>
-  <div class="nav-links">
-    <a href="index.html">Tracker</a>
-    <a href="about.html" class="active">About</a>
-    <a href="landscape.html">Landscape</a>
-    <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <a href="index.html" class="nav-badge" id="vol-badge" style="text-decoration:none;">Vol. 2, June 2026</a>
+<header>
+  <div class="rule top" style="--d:0s"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="index.html" class="topbar-name">Digital Health Pulse</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Tracker</a>
+        <a href="about.html" class="active">About</a>
+        <a href="landscape.html">Landscape</a>
+        <a href="newsletter.html">Newsletter</a>
+      </nav>
+      <div class="tools">
+        <a href="index.html" class="tool-btn" id="vol-link">Vol. 2, June 2026</a>
+        <button class="tool-btn" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
+      </div>
+    </div>
+    <div class="rule" style="--d:0.2s"></div>
   </div>
-</nav>
-<div class="page">
-  <div class="hero">
-    <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>About</div>
-    <h1 class="hero-title">Alexander Loos</h1>
-   <img src="photo.jpg" alt="Alexander Loos" style="width:200px; height:200px; border-radius:50%; object-fit:cover; margin-top:1.5rem; border: 3px solid #1e2230;">
-  </div>
-  <div class="content">
+</header>
+
+<main class="wrap">
+  <section class="page-head about-head settle" style="--d:0.45s">
+    <div>
+      <h1 class="page-title">Alexander Loos</h1>
+      <p class="page-desc">I started Digital Health Pulse to keep track of the health tech startups I kept reading about, and to get better at telling which ones will last.</p>
+    </div>
+    <img src="photo.jpg" alt="Alexander Loos" class="portrait">
+  </section>
+  <div class="rule mid" style="--d:0.6s"></div>
+
+  <div class="content settle" style="--d:0.8s">
     <div class="body-text">
-      <a href="index.html" class="back-link">&#8592; Back to tracker</a>
-      <p class="lead">I started Digital Health Pulse to keep track of the health tech startups I kept reading about, and to get better at telling which ones will last.</p>
       <p>I study Economics at UCLA, and next summer I'm joining L.E.K. Consulting as a Summer Associate, focused on life sciences and healthcare. Once a month I add new companies to the tracker, mostly in AI diagnostics and tech-driven drug discovery, with my notes on how each one plans to make money and what could get in its way.</p>
-      <div class="pull-quote"><p>How does better data change decision-making in healthcare, and who controls that process?</p></div>
+      <div class="pull">
+        <div class="rule navy"></div>
+        <p>How does better data change decision-making in healthcare, and who controls that process?</p>
+        <div class="rule thin"></div>
+      </div>
       <p>A lot of what gets written about this space is hype. I try to look past the funding headline and ask whether the company solves a problem someone will actually pay for, which is a surprisingly good filter.</p>
-      <p>I'm always up for a conversation, whether you're a student getting into the field or someone who's spent years in it. The easiest way to reach me is by <a href="mailto:alexanderloos@g.ucla.edu" class="inline-link">email</a> or <a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener" class="inline-link">LinkedIn</a>.</p>
+      <p>I'm always up for a conversation, whether you're a student getting into the field or someone who's spent years in it. The easiest way to reach me is by <a href="mailto:alexanderloos@g.ucla.edu" class="text-link">email</a> or <a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener" class="text-link">LinkedIn</a>.</p>
     </div>
-    <div class="sidebar">
-      <div class="sidebar-card">
-        <div class="sidebar-card-label">Background</div>
-        <div class="sidebar-item"><span class="sidebar-item-label">University</span><span class="sidebar-item-val">UCLA</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Major</span><span class="sidebar-item-val">Economics</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Minor</span><span class="sidebar-item-val">Biomedical Research (anticipated)</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Incoming</span><span class="sidebar-item-val">L.E.K. Consulting, Life Sciences &amp; Healthcare</span></div>
+
+    <aside>
+      <div class="side-block">
+        <div class="rule mid"></div>
+        <h2 class="sub-title">Background</h2>
+        <dl class="facts">
+          <div class="fact"><dt>University</dt><dd>UCLA</dd></div>
+          <div class="fact"><dt>Major</dt><dd>Economics</dd></div>
+          <div class="fact"><dt>Minor</dt><dd>Biomedical Research (anticipated)</dd></div>
+          <div class="fact"><dt>Incoming</dt><dd>L.E.K. Consulting, Life Sciences &amp; Healthcare</dd></div>
+        </dl>
       </div>
-      <div class="sidebar-card">
-        <div class="sidebar-card-label">Focus areas</div>
-        <div style="padding-top:4px;">
-          <span class="interest-tag">Health Tech</span>
-          <span class="interest-tag">AI Diagnostics</span>
-          <span class="interest-tag">AI Drug Discovery</span>
-          <span class="interest-tag">Digital Health</span>
-          <span class="interest-tag">Healthcare Strategy</span>
-          <span class="interest-tag">Startups &amp; Venture</span>
-        </div>
+      <div class="side-block">
+        <div class="rule mid"></div>
+        <h2 class="sub-title">Focus areas</h2>
+        <p class="side-text">Health tech, AI diagnostics, AI drug discovery, digital health, healthcare strategy, startups and venture.</p>
       </div>
-      <div class="sidebar-card">
-        <div class="sidebar-card-label">Get in touch</div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Email</span><a href="mailto:alexanderloos@g.ucla.edu" class="sidebar-link">alexanderloos@g.ucla.edu</a></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">LinkedIn</span><a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener" class="sidebar-link">linkedin.com/in/alexander-loos-</a></div>
+      <div class="side-block">
+        <div class="rule mid"></div>
+        <h2 class="sub-title">Get in touch</h2>
+        <dl class="facts">
+          <div class="fact"><dt>Email</dt><dd><a href="mailto:alexanderloos@g.ucla.edu">alexanderloos@g.ucla.edu</a></dd></div>
+          <div class="fact"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/alexander-loos-" target="_blank" rel="noopener">alexander-loos-</a></dd></div>
+        </dl>
       </div>
-      <div class="sidebar-card">
-        <div class="sidebar-card-label">This project</div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Started</span><span class="sidebar-item-val">April 2026</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Update cadence</span><span class="sidebar-item-val">Monthly</span></div>
-        <div class="sidebar-item"><span class="sidebar-item-label">Coverage</span><span class="sidebar-item-val">US Health Tech</span></div>
+      <div class="side-block">
+        <div class="rule mid"></div>
+        <h2 class="sub-title">This project</h2>
+        <dl class="facts">
+          <div class="fact"><dt>Started</dt><dd>April 2026</dd></div>
+          <div class="fact"><dt>Update cadence</dt><dd>Monthly</dd></div>
+          <div class="fact"><dt>Coverage</dt><dd>US Health Tech</dd></div>
+        </dl>
       </div>
-    </div>
+    </aside>
   </div>
-  <footer>
-    <div class="footer-left"><span class="nav-dot"></span>Digital Health Pulse</div>
-    <div class="footer-right">Funding data sourced from Crunchbase, PitchBook, and public press releases. Updated monthly.</div>
+
+  <footer class="site-foot">
+    <div class="rule navy"></div>
+    <div class="foot-inner">
+      <div class="footer-name">Digital Health Pulse</div>
+      <p class="footer-note">Funding data sourced from Crunchbase, PitchBook and public press releases. Updated monthly.</p>
+    </div>
   </footer>
-</div>
-<script>
-fetch('companies.json').then(r=>r.json()).then(d=>{const v=(d.meta&&d.meta.volumes)||[];const l=v[v.length-1];if(l){const b=document.getElementById('vol-badge');b.textContent=`Vol. ${l.number}, ${l.label}`;}}).catch(()=>{});
-</script>
+</main>
 </body>
 </html>

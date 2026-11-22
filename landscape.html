@@ -3,127 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landscape — Digital Health Pulse</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<title>Landscape | Digital Health Pulse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0e0f11; --bg2: #13151a; --bg3: #181b22;
-    --border: #1e2230; --border2: #252a38;
-    --ink: #e8edf8; --ink2: #9aa8c4; --ink3: #4a5570; --ink4: #2a3248;
-    --neon: #4db8ff; --neon-dim: #1a3a5a; --neon-text: #7dd4ff;
-    --r: 6px; --r-lg: 12px;
-  }
-  html { font-size: 16px; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; min-height: 100vh; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--ink); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 500; }
-  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--neon); display: inline-block; }
-  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-  .nav-links a { font-size: 13px; color: var(--ink3); text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--ink2); }
-  .nav-links a.active { color: var(--neon-text); }
-  .nav-badge { font-size: 11px; background: var(--neon-dim); color: var(--neon-text); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
-  .page { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
-  .hero { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
-  .hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neon-text); font-weight: 500; margin-bottom: 1.25rem; }
-  .hero-eyebrow-line { width: 22px; height: 1px; background: var(--neon); }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); color: var(--ink); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 1.25rem; font-weight: 500; }
-  .hero-desc { font-size: 15px; color: var(--ink3); max-width: 600px; line-height: 1.75; margin-bottom: 2rem; }
-  .hero-meta { display: flex; gap: 2.5rem; flex-wrap: wrap; }
-  .hero-meta-item { display: flex; flex-direction: column; gap: 3px; }
-  .hero-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); }
-  .hero-meta-val { font-size: 15px; font-weight: 500; color: var(--ink2); }
-  .viz-section { margin-bottom: 4rem; }
-  .viz-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 6px; font-weight: 500; }
-  .viz-desc { font-size: 14px; color: var(--ink3); line-height: 1.7; max-width: 700px; margin-bottom: 6px; }
-  .viz-sub { font-size: 11px; color: var(--ink4); margin-bottom: 1.25rem; }
-  .legend { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 1.25rem; }
-  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink3); }
-  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-  .year-btns { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
-  .yr-btn { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; color: var(--ink3); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
-  .yr-btn:hover { border-color: var(--ink3); color: var(--ink2); }
-  .yr-btn.active { background: var(--neon-dim); border-color: var(--neon); color: var(--neon-text); }
-  .chart-area { position: relative; width: 100%; height: 540px; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); }
-  .tooltip { position: absolute; pointer-events: none; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-lg); padding: 12px 14px; font-size: 12px; color: var(--ink); min-width: 200px; max-width: 240px; z-index: 10; display: none; }
-  .tooltip-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 500; margin-bottom: 5px; color: var(--ink); }
-  .tooltip-row { display: flex; justify-content: space-between; gap: 12px; color: var(--ink3); margin-top: 3px; font-size: 12px; }
-  .tooltip-val { color: var(--ink2); font-weight: 500; }
-  .tooltip-note { margin-top: 8px; font-size: 11px; color: var(--ink3); line-height: 1.6; }
-  .axis-label { font-size: 11px; color: var(--ink4); position: absolute; font-family: 'DM Sans', sans-serif; }
-  .grid-line { position: absolute; background: var(--border); }
-  .bubble { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-align: center; line-height: 1.3; transition: width 0.7s cubic-bezier(0.25,0.46,0.45,0.94), height 0.7s cubic-bezier(0.25,0.46,0.45,0.94), left 0.7s cubic-bezier(0.25,0.46,0.45,0.94), top 0.7s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease; }
-  .bubble:hover { opacity: 0.8; }
-  .bubble-label { font-size: 11px; font-weight: 500; padding: 3px; pointer-events: none; font-family: 'DM Sans', sans-serif; }
-  .stats-row { display: flex; gap: 8px; margin-top: 1.25rem; flex-wrap: wrap; }
-  .stat { flex: 1; min-width: 110px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); padding: 12px 14px; }
-  .stat-n { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); font-weight: 500; }
-  .stat-l { font-size: 11px; color: var(--ink4); margin-top: 2px; }
-  .insight-box { margin-top: 1.75rem; border-top: 1px solid var(--border); padding-top: 1.25rem; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
-  .insight-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); font-weight: 500; white-space: nowrap; padding-top: 2px; }
-  .insight-text { font-size: 13px; color: var(--ink3); line-height: 1.8; transition: opacity 0.35s ease; }
-  .insight-text strong { color: var(--ink2); font-weight: 500; }
-  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--ink3); display: flex; align-items: center; gap: 8px; }
-  .footer-right { font-size: 12px; color: var(--ink4); }
-  @media (max-width: 720px) { nav { padding: 1rem; } .page { padding: 0 1rem 4rem; } .hero { padding: 3rem 0 2.5rem; } .chart-area { height: 400px; } }
+  .viz-desc { font-size: 15px; color: var(--ink-2); line-height: 1.7; max-width: 46em; margin-bottom: 1.25rem; }
+  .controls { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; padding-bottom: 0.9rem; border-bottom: 1px solid var(--rule); }
+  .year-btns { display: flex; gap: 1.3rem; flex-wrap: wrap; }
+  .yr-btn { font-family: var(--sans); font-size: 14px; color: var(--ink-3); background: none; border: none; border-bottom: 2px solid transparent; padding: 2px 0; cursor: pointer; }
+  .yr-btn:hover { color: var(--ink); }
+  .yr-btn.active { color: var(--ink); border-bottom-color: var(--navy); font-weight: 500; }
+  .legend { display: flex; gap: 6px 16px; flex-wrap: wrap; margin: 1rem 0 0.5rem; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
+  .legend-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--t); border: 1.5px solid var(--c); flex-shrink: 0; }
+  .chart-area { position: relative; width: 100%; height: 540px; overflow: hidden; }
+  .grid-line { position: absolute; background: var(--rule); }
+  .axis-label { font-size: 12px; color: var(--ink-3); position: absolute; font-family: var(--sans); }
+  .bubble { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-align: center; line-height: 1.25; background: var(--t); border: 1.5px solid var(--c); color: var(--c); transition: width 0.7s cubic-bezier(0.25,0.46,0.45,0.94), height 0.7s cubic-bezier(0.25,0.46,0.45,0.94), left 0.7s cubic-bezier(0.25,0.46,0.45,0.94), top 0.7s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease; }
+  .bubble:hover { background: var(--c); color: var(--paper); z-index: 5; }
+  .bubble-label { font-size: 11px; font-weight: 500; padding: 3px; pointer-events: none; font-family: var(--sans); }
+  :root[data-theme="dark"] .bubble { background: color-mix(in srgb, var(--c) 45%, #141414); border-color: var(--t); color: var(--t); }
+  :root[data-theme="dark"] .legend-dot { background: color-mix(in srgb, var(--c) 45%, #141414); border-color: var(--t); }
+  .tooltip { position: absolute; pointer-events: none; background: var(--paper); border: 1px solid var(--ink); border-top: 3px solid var(--navy); padding: 12px 14px; font-size: 13px; color: var(--ink); min-width: 210px; max-width: 250px; z-index: 10; display: none; }
+  .tooltip-name { font-family: var(--serif); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .tooltip-row { display: flex; justify-content: space-between; gap: 12px; color: var(--ink-3); margin-top: 3px; }
+  .tooltip-val { color: var(--ink); font-weight: 500; }
+  .tooltip-note { margin-top: 8px; font-size: 12px; color: var(--ink-2); line-height: 1.55; }
+  .stat-word { font-size: 22px; line-height: 1.15; padding-top: 0.6rem; }
+  .note { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; margin-top: 2.5rem; }
+  .note .sub-title { padding-top: 0.6rem; }
+  .insight-text { font-family: var(--serif); font-size: 18px; color: var(--ink-2); line-height: 1.7; max-width: 40em; padding-top: 0.6rem; transition: opacity 0.35s ease; }
+  .insight-text strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 720px) { .chart-area { height: 400px; } .note { grid-template-columns: 1fr; gap: 0.5rem; } }
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><span class="nav-dot"></span>Digital Health Pulse</a>
-  <div class="nav-links">
-    <a href="index.html">Tracker</a>
-    <a href="about.html">About</a>
-    <a href="landscape.html" class="active">Landscape</a>
-    <a href="newsletter.html">Newsletter</a><a href="#">Archive</a>
-    <a href="index.html" class="nav-badge" id="vol-badge" style="text-decoration:none;">Vol. 2, June 2026</a>
-  </div>
-</nav>
-<div class="page">
-  <div class="hero">
-    <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Market intelligence</div>
-    <h1 class="hero-title">The Digital Health Landscape</h1>
-    <p class="hero-desc">A visual map of where venture capital has flowed across the digital health ecosystem from 2021 to 2026, tracking nearly 50 companies across nine sub-sectors by funding size, market maturity and momentum.</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item"><span class="hero-meta-label">Companies mapped</span><span class="hero-meta-val">49</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Years covered</span><span class="hero-meta-val">2021 to 2026</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Sub-sectors</span><span class="hero-meta-val">9</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Updated</span><span class="hero-meta-val">November 21, 2026</span></div>
+<header>
+  <div class="rule top" style="--d:0s"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="index.html" class="topbar-name">Digital Health Pulse</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Tracker</a>
+        <a href="about.html">About</a>
+        <a href="landscape.html" class="active">Landscape</a>
+        <a href="newsletter.html">Newsletter</a>
+      </nav>
+      <div class="tools">
+        <a href="index.html" class="tool-btn" id="vol-link">Vol. 2, June 2026</a>
+        <button class="tool-btn" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
+      </div>
     </div>
+    <div class="rule" style="--d:0.2s"></div>
   </div>
-  <div class="viz-section">
-    <div class="viz-title">US digital health VC landscape, 2021–2026</div>
-    <div class="viz-desc">Each bubble represents a funded digital health company — sized by total capital raised, positioned by market maturity (x-axis) and funding momentum (y-axis), and colored by sub-sector. Hover any bubble to see the company's mission and latest funding details.</div>
-    <div class="viz-sub">Bubble size = total capital raised · Y-axis = funding momentum · X-axis = market maturity (early → mature)</div>
+</header>
+
+<main class="wrap">
+  <section class="page-head settle" style="--d:0.45s">
+    <h1 class="page-title">The Digital Health Landscape</h1>
+    <p class="page-desc">A visual map of where venture capital has flowed across the digital health ecosystem from 2021 to 2026, tracking nearly 50 companies across nine sub-sectors by funding size, market maturity and momentum.</p>
+    <p class="page-meta"><strong>49</strong> companies mapped, <strong>9</strong> sub-sectors, updated <strong>November 21, 2026</strong></p>
+  </section>
+
+  <section class="section" style="margin-top:0.5rem">
+    <div class="rule navy" style="--d:0.65s"></div>
+    <h2 class="section-title">US digital health VC landscape, 2021 to 2026</h2>
+    <p class="viz-desc">Each bubble is a funded digital health company. Size shows total capital raised, left to right runs from early to mature markets, height shows funding momentum, and color marks the sub-sector. Hover any bubble for the company's mission and latest round.</p>
+    <div class="controls">
+      <div class="year-btns">
+        <button class="yr-btn active" onclick="setYear('all',this)">All years</button>
+        <button class="yr-btn" onclick="setYear('2021',this)">2021</button>
+        <button class="yr-btn" onclick="setYear('2022',this)">2022</button>
+        <button class="yr-btn" onclick="setYear('2023',this)">2023</button>
+        <button class="yr-btn" onclick="setYear('2024',this)">2024</button>
+        <button class="yr-btn" onclick="setYear('2025',this)">2025</button>
+        <button class="yr-btn" onclick="setYear('2026',this)">2026</button>
+      </div>
+    </div>
     <div class="legend" id="legend"></div>
-    <div class="year-btns">
-      <button class="yr-btn active" onclick="setYear('all',this)">All years</button>
-      <button class="yr-btn" onclick="setYear('2021',this)">2021</button>
-      <button class="yr-btn" onclick="setYear('2022',this)">2022</button>
-      <button class="yr-btn" onclick="setYear('2023',this)">2023</button>
-      <button class="yr-btn" onclick="setYear('2024',this)">2024</button>
-      <button class="yr-btn" onclick="setYear('2025',this)">2025</button>
-      <button class="yr-btn" onclick="setYear('2026',this)">2026</button>
-    </div>
     <div class="chart-area" id="chart-area"><div class="tooltip" id="tooltip"></div></div>
-    <div class="stats-row" id="stats-row"></div>
-    <div class="insight-box">
-      <div class="insight-label">Landscape note</div>
-      <div class="insight-text" id="insight-text"></div>
+    <div class="rule mid"></div>
+    <div class="stats" id="stats-row"></div>
+    <div class="rule"></div>
+
+    <div class="note">
+      <div><div class="rule mid"></div><h3 class="sub-title">Landscape note</h3></div>
+      <div><div class="rule thin" style="margin-top:1px"></div><div class="insight-text" id="insight-text"></div></div>
     </div>
-  </div>
-  <footer>
-    <div class="footer-left"><span class="nav-dot"></span>Digital Health Pulse</div>
-    <div class="footer-right">Funding data sourced from Crunchbase, PitchBook, and public press releases. Updated each issue.</div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="rule navy"></div>
+    <div class="foot-inner">
+      <div class="footer-name">Digital Health Pulse</div>
+      <p class="footer-note">Funding data sourced from Crunchbase, PitchBook and public press releases. Updated each issue.</p>
+    </div>
   </footer>
-</div>
+</main>
 <script>
 // Landscape data now lives in landscape.json.
 let sectors=[],companies=[],insights={};
 let activeYear='all',bubbleEls={};
-function sMeta(id){return sectors.find(s=>s.id===id)||{color:'#2a3040',text:'#a0b0d0',label:id};}
+function sMeta(id){return sectors.find(s=>s.id===id)||{color:'#3F4652',text:'#E2E3E5',label:id};}
 function bSize(f){const mn=34,mx=100,mf=18,xf=1100;return mn+Math.pow((f-mf)/(xf-mf),0.55)*(mx-mn);}
 function initBubbles(){
   const area=document.getElementById('chart-area');
@@ -131,14 +115,14 @@ function initBubbles(){
   bubbleEls={};
   const tooltip=document.getElementById('tooltip');
   const W=area.offsetWidth||900,H=540,P={t:24,r:24,b:44,l:48};
-  for(let i=1;i<=4;i++){const yP=i*20,yPx=P.t+((100-yP)/100)*(H-P.t-P.b);const ln=document.createElement('div');ln.className='grid-line';ln.style.cssText=`left:${P.l}px;right:${P.r}px;top:${yPx}px;height:0.5px;`;area.appendChild(ln);const lb=document.createElement('div');lb.className='axis-label';lb.style.cssText=`left:6px;top:${yPx-7}px;`;lb.textContent=`${yP}%`;area.appendChild(lb);}
+  for(let i=1;i<=4;i++){const yP=i*20,yPx=P.t+((100-yP)/100)*(H-P.t-P.b);const ln=document.createElement('div');ln.className='grid-line';ln.style.cssText=`left:${P.l}px;right:${P.r}px;top:${yPx}px;height:1px;`;area.appendChild(ln);const lb=document.createElement('div');lb.className='axis-label';lb.style.cssText=`left:6px;top:${yPx-7}px;`;lb.textContent=`${yP}%`;area.appendChild(lb);}
   ['Early','Growth','Late','Mature'].forEach((s,i)=>{const xPx=P.l+((i+1)*20/100)*(W-P.l-P.r);const lb=document.createElement('div');lb.className='axis-label';lb.style.cssText=`bottom:10px;left:${xPx-18}px;`;lb.textContent=s;area.appendChild(lb);});
   companies.forEach((c,idx)=>{
     const m=sMeta(c.sector),sz=bSize(c.funding);
     const xPx=P.l+(c.x/100)*(W-P.l-P.r)-sz/2,yPx=P.t+((100-c.y)/100)*(H-P.t-P.b)-sz/2;
     const b=document.createElement('div');b.className='bubble';
-    b.style.cssText=`width:${sz}px;height:${sz}px;left:${xPx}px;top:${yPx}px;background:${m.color};opacity:1;`;
-    b.innerHTML=`<span class="bubble-label" style="color:${m.text};font-size:${sz>65?11:10}px;">${c.name}</span>`;
+    b.style.cssText=`width:${sz}px;height:${sz}px;left:${xPx}px;top:${yPx}px;--c:${m.color};--t:${m.text};opacity:1;`;
+    b.innerHTML=`<span class="bubble-label" style="font-size:${sz>65?11:10}px;">${c.name}</span>`;
     b.addEventListener('mouseenter',()=>{tooltip.style.display='block';tooltip.innerHTML=`<div class="tooltip-name">${c.name}</div><div class="tooltip-row"><span>${m.label}</span></div><div class="tooltip-row"><span>Total raised</span><span class="tooltip-val">$${c.funding}M</span></div><div class="tooltip-row"><span>Stage</span><span class="tooltip-val">${c.stage}</span></div><div class="tooltip-row"><span>Year</span><span class="tooltip-val">${c.year}</span></div><div class="tooltip-note">${c.note}</div>`;});
     b.addEventListener('mousemove',(e)=>{const r=area.getBoundingClientRect();let tx=e.clientX-r.left+14,ty=e.clientY-r.top+14;if(tx+220>W)tx=tx-240;if(ty+200>H)ty=ty-210;tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';});
     b.addEventListener('mouseleave',()=>{tooltip.style.display='none';});
@@ -161,17 +145,14 @@ function applyFilter(){
   const fil=activeYear==='all'?companies:companies.filter(c=>c.year===activeYear);
   const tot=fil.reduce((a,c)=>a+c.funding,0),avg=Math.round(tot/fil.length);
   const topId=Object.entries(fil.reduce((acc,c)=>{acc[c.sector]=(acc[c.sector]||0)+c.funding;return acc;},{})).sort((a,b)=>b[1]-a[1])[0][0];
-  document.getElementById('stats-row').innerHTML=`<div class="stat"><div class="stat-n">$${tot>=1000?(tot/1000).toFixed(1)+'B':tot+'M'}</div><div class="stat-l">Capital shown</div></div><div class="stat"><div class="stat-n">${fil.length}</div><div class="stat-l">Companies</div></div><div class="stat"><div class="stat-n">$${avg}M</div><div class="stat-l">Avg raise</div></div><div class="stat"><div class="stat-n" style="font-size:13px;padding-top:3px;">${sMeta(topId).label}</div><div class="stat-l">Top sector</div></div>`;
+  document.getElementById('stats-row').innerHTML=`<div class="stat"><div class="stat-num">$${tot>=1000?(tot/1000).toFixed(1)+'B':tot+'M'}</div><div class="stat-lbl">Capital shown</div></div><div class="stat"><div class="stat-num">${fil.length}</div><div class="stat-lbl">Companies</div></div><div class="stat"><div class="stat-num">$${avg}M</div><div class="stat-lbl">Average raise</div></div><div class="stat"><div class="stat-num stat-word">${sMeta(topId).label}</div><div class="stat-lbl">Top sector</div></div>`;
   const ins=document.getElementById('insight-text');ins.style.opacity='0';
   setTimeout(()=>{ins.innerHTML=insights[activeYear]||insights.all;ins.style.opacity='1';},300);
-  document.getElementById('legend').innerHTML=sectors.map(s=>`<div class="legend-item"><div class="legend-dot" style="background:${s.color};"></div>${s.label}</div>`).join('');
+  document.getElementById('legend').innerHTML=sectors.map(s=>`<div class="legend-item"><div class="legend-dot" style="--c:${s.color};--t:${s.text};"></div>${s.label}</div>`).join('');
 }
 function setYear(y,btn){activeYear=y;document.querySelectorAll('.yr-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilter();}
 fetch("landscape.json").then(r=>r.json()).then(d=>{sectors=d.sectors;companies=d.companies;insights=d.insights;initBubbles();});
 window.addEventListener('resize',initBubbles);
-</script>
-<script>
-fetch('companies.json').then(r=>r.json()).then(d=>{const v=(d.meta&&d.meta.volumes)||[];const l=v[v.length-1];if(l){const b=document.getElementById('vol-badge');b.textContent=`Vol. ${l.number}, ${l.label}`;}}).catch(()=>{});
 </script>
 </body>
 </html>

@@ -3,56 +3,56 @@
     {
       "id": "ai-diag",
       "label": "AI Diagnostics",
-      "color": "#1a6aaa",
-      "text": "#c8e8ff"
+      "color": "#1C3A63",
+      "text": "#DCE3EE"
     },
     {
       "id": "care-nav",
       "label": "Care Navigation",
-      "color": "#0f5a42",
-      "text": "#8adec4"
+      "color": "#2F5D50",
+      "text": "#DCE8E3"
     },
     {
       "id": "mental",
       "label": "Mental Health Tech",
-      "color": "#3d2e88",
-      "text": "#c0b4f0"
+      "color": "#5B4B8A",
+      "text": "#E4E0F0"
     },
     {
       "id": "telehealth",
       "label": "Telehealth",
-      "color": "#7a2a1a",
-      "text": "#f0a898"
+      "color": "#9A3B2E",
+      "text": "#F2DFDA"
     },
     {
       "id": "analytics",
       "label": "Health Analytics",
-      "color": "#6a3a08",
-      "text": "#e8b878"
+      "color": "#7E5B1C",
+      "text": "#F1E7D2"
     },
     {
       "id": "insurance",
       "label": "Health Insurance Tech",
-      "color": "#1e4a18",
-      "text": "#88cc78"
+      "color": "#4F6B2C",
+      "text": "#E3EAD6"
     },
     {
       "id": "wearables",
       "label": "Wearables & Biosensors",
-      "color": "#5a1a38",
-      "text": "#e898c8"
+      "color": "#8A3E63",
+      "text": "#F0DEE7"
     },
     {
       "id": "drug-disc",
       "label": "AI Drug Discovery",
-      "color": "#2a3040",
-      "text": "#a0b0d0"
+      "color": "#3F4652",
+      "text": "#E2E3E5"
     },
     {
       "id": "ai-agents",
       "label": "Healthcare AI Agents",
-      "color": "#0e4a5a",
-      "text": "#9ae0ec"
+      "color": "#1F6A78",
+      "text": "#D8E9EC"
     }
   ],
   "companies": [
