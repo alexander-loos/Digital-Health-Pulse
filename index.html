@@ -64,13 +64,15 @@
   .take-vol { font-size: 13px; color: var(--ink-3); margin-top: 1rem; }
   .row-body .facts { border-top: 2px solid var(--ink); }
 
-  /* First visit: the helix spirals in while the rules draw */
+  /* First visit: the helix rises diagonally up and to the left, coiling upward from its base,
+     growing and fading in while the rules draw */
   @media (prefers-reduced-motion: no-preference) {
-    .js-intro .helix { animation: spiralIn 2s cubic-bezier(.16,.84,.24,1) 0.15s both; }
-    @keyframes spiralIn {
-      0%   { opacity: 0;    transform: rotate(-260deg) scale(0.2); }
-      55%  { opacity: 0.92; }
-      100% { opacity: 0.92; transform: rotate(0deg) scale(1); }
+    .js-intro .helix { transform-origin: 70% 100%; animation: riseCoil 3s cubic-bezier(.22,.7,.2,1) 0.2s both; }
+    @keyframes riseCoil {
+      0%   { opacity: 0;    transform: translate(22%, 26%) scale(0.5);  clip-path: inset(100% 0 0 0); }
+      30%  { opacity: 0.5; }
+      70%  { clip-path: inset(0 0 0 0); }
+      100% { opacity: 0.92; transform: translate(0, 0) scale(1);       clip-path: inset(0 0 0 0); }
     }
   }
 
