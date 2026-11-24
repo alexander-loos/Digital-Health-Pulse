@@ -369,12 +369,12 @@
     {
       "name": "Neko Health",
       "sector": "wearables",
-      "funding": 260,
-      "stage": "Series B",
-      "x": 30,
-      "y": 74,
-      "year": "2024",
-      "note": "A preventive health company offering full-body scans combining multiple imaging modalities in a single 10-minute visit. Founded by Spotify co-founder Daniel Ek, with clinics in Europe and US expansion underway."
+      "funding": 1000,
+      "stage": "Series C",
+      "x": 70,
+      "y": 90,
+      "year": "2026",
+      "note": "A preventive health company offering radiation-free full-body scans, co-founded by Daniel Ek. Raised a $700M Series C co-led by Lightspeed in July 2026 and plans a New York clinic."
     },
     {
       "name": "Oura",
@@ -437,64 +437,34 @@
       "note": "A population health analytics platform that aggregates multi-payer data to support value-based care performance tracking. Used by health systems, ACOs, and payers to manage quality metrics and risk stratification."
     },
     {
-      "name": "Seer Bio",
-      "sector": "drug-disc",
-      "funding": 225,
-      "stage": "Series C",
-      "x": 20,
-      "y": 44,
-      "year": "2026",
-      "note": "A proteomics-driven drug discovery company using deep plasma proteomics to identify novel disease biomarkers and therapeutic targets. Raised a new round in early 2026 to expand its multi-omics discovery platform."
-    },
-    {
-      "name": "BioNTech Digital",
-      "sector": "drug-disc",
-      "funding": 350,
-      "stage": "Series B",
-      "x": 28,
-      "y": 62,
-      "year": "2026",
-      "note": "A spinout from BioNTech focused on applying mRNA platform technology and AI to oncology diagnostics and personalized cancer vaccines. One of the most closely watched digital health entrants of early 2026."
-    },
-    {
       "name": "Nym Health",
       "sector": "insurance",
-      "funding": 90,
-      "stage": "Series B",
+      "funding": 95,
+      "stage": "Series C",
       "x": 42,
       "y": 70,
-      "year": "2026",
-      "note": "An autonomous medical coding platform using NLP to translate clinical notes into billing codes with high accuracy. Targets revenue cycle teams at hospitals and physician groups to reduce manual coding labor."
+      "year": "2024",
+      "note": "An autonomous medical coding platform that translates clinical notes into billing codes. Raised $47M led by PSG in October 2024 and is used by health systems including Geisinger and Henry Ford Health."
     },
     {
       "name": "Atropos Health",
       "sector": "analytics",
-      "funding": 55,
+      "funding": 47,
       "stage": "Series B",
       "x": 32,
       "y": 56,
-      "year": "2026",
-      "note": "A real-world evidence platform that generates on-demand observational studies from EHR-connected patient data. Serves pharmaceutical companies and health systems seeking rapid evidence-based answers to clinical questions."
+      "year": "2024",
+      "note": "A real-world evidence platform that turns de-identified patient records into on-demand observational studies. Raised a $33M Series B led by Valtruis in May 2024, with pharma and distributor backers."
     },
     {
       "name": "Nabla",
       "sector": "ai-diag",
-      "funding": 70,
-      "stage": "Series B",
+      "funding": 120,
+      "stage": "Series C",
       "x": 36,
       "y": 88,
-      "year": "2026",
-      "note": "A European ambient AI documentation company expanding aggressively into the US market. Competes with Abridge and Ambience on clinical note generation quality and specialty coverage breadth."
-    },
-    {
-      "name": "Heliogen Health",
-      "sector": "care-nav",
-      "funding": 45,
-      "stage": "Series A",
-      "x": 22,
-      "y": 78,
-      "year": "2026",
-      "note": "An AI-powered chronic care coordination platform focused on underserved and Medicaid populations. Combines community health worker workflows with predictive analytics to reduce avoidable hospitalizations."
+      "year": "2025",
+      "note": "An ambient AI documentation company, founded in Paris, that writes clinical notes from doctor and patient conversations. Raised a $70M Series C led by HV Capital in June 2025 and is used by more than 85,000 clinicians."
     },
     {
       "name": "Assort Health",
@@ -545,6 +515,56 @@
       "y": 56,
       "year": "2026",
       "note": "Pairs organ-on-chip human tissue models with lab automation and AI to predict how drugs will behave in people before clinical trials. Closed a $50M Series A and A+ in June 2026."
+    },
+    {
+      "name": "Candid Health",
+      "sector": "insurance",
+      "funding": 219,
+      "stage": "Series D",
+      "x": 78,
+      "y": 84,
+      "year": "2026",
+      "note": "Automates medical billing and insurance claims for providers. Raised a $120M Series D led by Sixth Street Growth in July 2026 at triple its 2025 valuation, after 190% revenue growth."
+    },
+    {
+      "name": "Chai Discovery",
+      "sector": "drug-disc",
+      "funding": 630,
+      "stage": "Series C",
+      "x": 28,
+      "y": 92,
+      "year": "2026",
+      "note": "Builds AI models that predict how molecules bind, used for antibody design. Raised a $400M Series C led by Index Ventures in July 2026 at a $3.8B valuation, with Pfizer and Novartis deals."
+    },
+    {
+      "name": "Function Health",
+      "sector": "wearables",
+      "funding": 800,
+      "stage": "Growth",
+      "x": 54,
+      "y": 80,
+      "year": "2026",
+      "note": "A membership for 160+ lab tests plus imaging, with more than 500,000 members. Took $450M from General Catalyst's Customer Value Fund in July 2026 to fund member growth."
+    },
+    {
+      "name": "Pearl Health",
+      "sector": "analytics",
+      "funding": 125,
+      "stage": "Series C",
+      "x": 56,
+      "y": 68,
+      "year": "2026",
+      "note": "Software and AI agents for primary care doctors in Medicare value-based care, covering about 250,000 patients. Raised $110M ($50M equity led by a16z plus $60M debt) in July 2026."
+    },
+    {
+      "name": "Bunkerhill Health",
+      "sector": "ai-agents",
+      "funding": 55,
+      "stage": "Series B",
+      "x": 32,
+      "y": 66,
+      "year": "2026",
+      "note": "Carebricks lets health systems build their own AI agents, live at Cleveland Clinic, UTMB and Intermountain. Raised a $25M Series B led by Khosla Ventures in July 2026."
     }
   ],
   "insights": {
@@ -553,7 +573,7 @@
     "2023": "2023 was a year of consolidation and flight to quality as the broader tech downturn compressed multiples and forced discipline. <strong>Hinge Health, Omada, and Tempus AI</strong> secured late-stage rounds signaling IPO readiness, while mental health and chronic disease management emerged as durable employer benefit categories. AI documentation began its quiet ascent — Ambience and Commure both raised in 2023, planting the seeds for the ambient AI wave that would define 2025.",
     "2024": "2024 was the year ambient clinical AI crossed from pilot to production. <strong>Abridge, Ambience, and Suki</strong> collectively raised over $800M as health systems moved decisively to enterprise contracts. Care navigation saw its defining consolidation moment — Transcarent's $621M merger with Accolade. Payer AI also matured, with Anterior and Cohere Health closing meaningful rounds on demonstrated ROI rather than promise.",
     "2025": "2025 was defined by two macro forces: the <strong>AI drug discovery supercycle</strong> and the maturation of clinical AI infrastructure. Isomorphic Labs and Lila Sciences alone absorbed over $1.1B, signaling that deep-tech life science AI has entered a new capital intensity regime. On the care delivery side, Abridge's $5.3B valuation and Hinge Health's IPO filing marked the arrival of digital health's second generation of public-market-ready companies.",
-    "2026": "So far 2026 belongs to AI agents, the software that does a task from start to finish instead of just suggesting what a person should do. In June alone, Assort Health and Trase raised more than $225 million between them to automate the phone calls and paperwork that bury hospital staff. Chronic care is moving the same direction, with Cadence planning to hand routine monitoring work to AI, while companies like xCures sit one layer down and clean up the messy records those agents depend on. On the drug discovery side, the money is chasing better human data, which is why Xellar's organ-on-chip models drew a $50 million round.",
+    "2026": "So far 2026 belongs to AI agents, the software that does a task from start to finish instead of just suggesting what a person should do. In June, Assort Health and Trase raised more than $225 million between them to automate the phone calls and paperwork that bury hospital staff, and in July Bunkerhill Health raised money to let hospitals build agents of their own. The other big story is money pooling into companies with proof in hand. Rock Health counted $7.4 billion for US digital health in the first half, with rounds of $100 million or more taking 45% of it, and July's largest checks went to companies like <strong>Candid Health and Chai Discovery</strong> that can already point to paying customers. On the drug discovery side, investors are now pricing AI platforms like Chai in the billions before a single molecule reaches a patient.",
     "all": "Across the full dataset, capital concentration in digital health has undergone a meaningful structural shift since 2021. Early broad-market enthusiasm — characterized by large rounds into telehealth platforms and consumer wearables — has given way to targeted infrastructure-layer bets. <strong>AI-native clinical tools, ambient documentation, and payer workflow automation</strong> are absorbing the largest share of late-stage conviction capital heading into 2026. The companies commanding the highest valuations today are no longer platform plays; they are deeply integrated workflow tools with measurable ROI."
   }
 }

@@ -1,0 +1,89 @@
+{
+  "_how_to_edit": "This is the list of places the monthly update checks. To add a source, copy one block, change the name, url and use_for, and save. To pause a source without deleting it, set active to false. method: rss = reads the site's feed of new articles; page = reads the web page directly; search = the page blocks automated reading, so the run searches the web for that site's recent articles instead.",
+  "coverage": "US Health Tech: startups building technology for healthcare, from AI diagnostics to tech-driven drug discovery",
+  "lookback_days": 31,
+  "sources": [
+    {
+      "name": "STAT News",
+      "url": "https://www.statnews.com/feed/",
+      "method": "rss",
+      "use_for": "Big health and biotech news, policy, FDA decisions. Many articles are paywalled (STAT+), so use headlines and summaries as signals, then confirm details elsewhere.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works"
+    },
+    {
+      "name": "Fierce Biotech",
+      "url": "https://www.fiercebiotech.com",
+      "method": "search",
+      "use_for": "Large trends and comparisons between big players: pharma deals, layoffs, clinical readouts, AI drug discovery.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "feed blocked and page returned old content; use web search for site:fiercebiotech.com"
+    },
+    {
+      "name": "Fierce Healthcare",
+      "url": "https://www.fiercehealthcare.com/rss/xml",
+      "method": "rss",
+      "use_for": "Health tech side of Fierce: payers, providers, digital health companies, AI in care delivery.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works (feed is a bit messy, dates out of order)"
+    },
+    {
+      "name": "a16z Bio + Health",
+      "url": "https://a16z.com/bio-health/",
+      "method": "page",
+      "use_for": "New investments and theses from a top health tech VC. 'Investing in X' posts are early signals of who is getting funded.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works, but posts show no dates; check each new name against the news"
+    },
+    {
+      "name": "Sequoia Stories",
+      "url": "https://www.sequoiacap.com/stories/",
+      "method": "page",
+      "use_for": "Portfolio announcements and founder profiles. Mostly non-health, so only keep healthcare items.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works, no dates, little healthcare content"
+    },
+    {
+      "name": "Crunchbase News: Health, Wellness and Biotech",
+      "url": "https://news.crunchbase.com/sections/health-wellness-biotech/feed/",
+      "method": "rss",
+      "use_for": "Funding rounds with amounts, investors and valuations. The weekly 'biggest rounds' roundup is the best single place to find new companies.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works"
+    },
+    {
+      "name": "PR Newswire: Health",
+      "url": "https://www.prnewswire.com/rss/health-latest-news/health-latest-news-list.rss",
+      "method": "rss",
+      "use_for": "Company press releases announcing raises, launches and partnerships. Very noisy: only keep US health tech funding and product news.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works"
+    },
+    {
+      "name": "Rock Health",
+      "url": "https://rockhealth.com/insights/",
+      "method": "search",
+      "use_for": "The standard quarterly US digital health funding reports. Use for market-level numbers in the market take.",
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "page blocked; use web search for the latest Rock Health funding report"
+    },
+    {
+      "name": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/quote/",
+      "method": "page",
+      "use_for": "Ticker watch only: stock prices of public health tech companies used as comparisons for the startups. Add the ticker to the end of the url.",
+      "tickers": ["HIMS", "TDOC", "DOCS", "TEM", "RXRX", "WAY"],
+      "active": true,
+      "last_tested": "2026-11-24",
+      "status": "works, prices can lag a day or more; always print the date shown"
+    }
+  ]
+}

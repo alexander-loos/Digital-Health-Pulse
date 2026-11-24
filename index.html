@@ -273,6 +273,8 @@ function setVolume(n){
   filtered=[...companies];
   document.getElementById('vol-badge').innerHTML=`${volLabel(v)} <span class="vol-caret">&#9662;</span>`;
   const note=document.getElementById('vol-note');
+  const upd=(v&&v.updated)||(n==='all'&&volumes.length?volumes[volumes.length-1].updated:null);
+  if(upd) document.getElementById('hero-updated').textContent=upd;
   if(v && v.note){ note.textContent=v.note; note.classList.add('show'); } else { note.textContent=''; note.classList.remove('show'); }
   try{ history.replaceState(null,'',n==='all'?'?vol=all':`?vol=${n}`); }catch(e){}
   document.querySelector('.sort-wrap select').value='default';
